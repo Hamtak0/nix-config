@@ -18,6 +18,7 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
+    # ./steam.nix
     ./rofi.nix
     ./fish.nix
     ./git.nix
@@ -48,6 +49,12 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      # allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+#	"steam"
+# 	"steam-original"
+#	"steam-unwrapped"
+#	"steam-run"
+      # ];
     };
   };
 

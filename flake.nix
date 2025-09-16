@@ -1,5 +1,5 @@
 {
-  description = "HORSES FORCED ME";
+  description = "Dried by Horse Girls";
 
   inputs = {
     # Nixpkgs
