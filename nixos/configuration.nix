@@ -25,6 +25,7 @@
     ./bluetooth.nix
     ./users.nix
     ./hardware-configuration.nix
+    ./programs
 
     inputs.home-manager.nixosModules.home-manager
   ];
@@ -173,8 +174,6 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
 
   programs = {
-    neovim.enable = true;
-    hyprland.enable = true;
     foot.enable = true;
     light.enable = true;
     git.enable = true;
