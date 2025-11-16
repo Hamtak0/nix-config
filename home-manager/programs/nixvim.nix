@@ -2,7 +2,7 @@
   inputs,
   ...
 }: {
-  # imports = [ inputs.nixvim.homeModules.nixvim ];
+  imports = [ inputs.nixvim.homeModules.nixvim ];
 
   programs.fish.shellAbbrs = {
     v = "vi";
@@ -18,5 +18,6 @@
       termguicolors = true;
       shiftwidth = 2;
       textwidth = 80;
+    };
   };
 }
