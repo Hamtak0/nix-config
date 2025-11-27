@@ -67,6 +67,7 @@
       bind = [
 	"$mod, w, killactive"
 	"$mod, r, exec, uwsm-app -- rofi -show drun -show-icons"
+	"$mod, a, exec, uwsm-app -- rofi -show run -show-icons"
 
 	"$mod, Return, exec, uwsm-app -- $term"
       ];

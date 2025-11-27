@@ -26,6 +26,7 @@
     ./users.nix
     ./hardware-configuration.nix
     ./programs
+    # ./steam.nix
 
     inputs.home-manager.nixosModules.home-manager
   ];
@@ -93,7 +94,10 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
+  il8n.extraLocales = [ "th_TH.UTF-8/UTF-8" "ja_JP.UTF-8/UTF-8" ];
+
+
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
@@ -180,6 +184,10 @@
     fish.enable = true;
     tmux.enable = true;
   };
+
+  environment.systemPackages = [
+    pkgs.brightnessctl
+  ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";
