@@ -64,7 +64,13 @@
   };
 
   # Add stuff for your user as you see fit:
-  home.packages = with pkgs; [steam brave discord];
+  home.packages = with pkgs; [
+    steam
+    brave
+    discord
+    devenv
+  ];
+
   programs.home-manager.enable = true;
 
   # Nicely reload system units when changing configs

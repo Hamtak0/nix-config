@@ -74,6 +74,8 @@
       flake-registry = "";
       # Workaround for https://github.com/NixOS/nix/issues/9574
       nix-path = config.nix.nixPath;
+
+      extra-trusted-users = [ "tako" ];
     };
     # Opinionated: disable channels
     channel.enable = false;
@@ -95,7 +97,10 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-  il8n.extraLocales = [ "th_TH.UTF-8/UTF-8" "ja_JP.UTF-8/UTF-8" ];
+  i18n.extraLocales = [
+    "th_TH.UTF-8/UTF-8"
+    "ja_JP.UTF-8/UTF-8"
+  ];
 
 
   # console = {
@@ -183,6 +188,7 @@
     git.enable = true;
     fish.enable = true;
     tmux.enable = true;
+    direnv.enable = true;
   };
 
   environment.systemPackages = [
