@@ -2,7 +2,6 @@
   programs.rofi = {
     enable = true;
     terminal = "foot";
-
   };
 
   # Using programs/hyprland/default.nix instead

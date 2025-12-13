@@ -1,6 +1,6 @@
 {
   imports = [
-    # ./hyprland
+    ./hyprland
     # ./nixvim.nix
     ./rofi.nix
     ./zed.nix

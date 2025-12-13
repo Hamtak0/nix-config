@@ -10,15 +10,21 @@
     # Also see the 'unstable-packages' overlay at 'overlays/default.nix'.
 
     # Home manager
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-
+    home-manager = {
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
   };
 
   outputs = {

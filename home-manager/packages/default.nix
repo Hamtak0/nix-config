@@ -1,0 +1,5 @@
+{
+  import = [
+    ./grimblast.nix
+  ];
+}
