@@ -9,7 +9,9 @@
     package = null;
     portalPackage = null;
     systemd.enable = false;
-    plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [ hyprscrolling ];
+    plugins = [
+      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling 
+    ];
     settings = {
       monitor = [
         # "desc:Chimei Innolux Corporation 0x1521, preferred, auto, 1"
@@ -45,7 +47,7 @@
 
       decoration = {
         rounding = 8;
-	active__opacity = 1.0;
+	active_opacity = 1.0;
 	inactive_opacity = 0.96;
         blur = {
           enabled = true;
@@ -117,6 +119,16 @@
       "$term" = "foot";
       "$term_alt" = "foot";
 
+      binde = [
+        "$mod CTRL, h, layoutmsg, colresize -conf"
+        "$mod CTRL, h, layoutmsg, colresize -0.2"
+        "$mod CTRL, h, layoutmsg, colresize +0.2"
+        "$mod CTRL, h, layoutmsg, colresize +conf"
+
+        "$mod, Tab, layoutmsg, move +col"
+        "$mod SHIFT, Tab, layoutmsg, move -col"
+      ];
+
       bind = [
 	"$mod, w, killactive"
 	"$mod, r, exec, uwsm-app -- rofi -show drun -show-icons"
@@ -130,58 +142,58 @@
     	"$mod, Print, exec, uwsm-app -- grimblast --notify copysave active"
 
         # # Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
-        # bind = $mainMod, Return, exec, $terminal
-        # bind = $mainMod, W, killactive,
-        # bind = $mainMod, M, exit,
-        # #bind = $mainMod, E, exec, $fileManager
-        # bind = $mainMod, V, togglefloating,
-        # bind = $mainMod, r, exec, uwsm-app -- rofi -show drun -show-icons
-        # bind = $mainMod, s, exec, uwsm-app -- rofi -show run -show-icons
-        # #bind = $mainMod, S, exec, $menu
-        # #bind = $mainMod, P, pseudo, # dwindle
-        # #bind = $mainMod, J, togglesplit, # dwindle
+        # bind = $mod, Return, exec, $terminal
+        # bind = $mod, W, killactive,
+        # bind = $mod, M, exit,
+        # #bind = $mod, E, exec, $fileManager
+        # bind = $mod, V, togglefloating,
+        # bind = $mod, r, exec, uwsm-app -- rofi -show drun -show-icons
+        # bind = $mod, s, exec, uwsm-app -- rofi -show run -show-icons
+        # #bind = $mod, S, exec, $menu
+        # #bind = $mod, P, pseudo, # dwindle
+        # #bind = $mod, J, togglesplit, # dwindle
         # 
-        # # Move focus with mainMod + arrow keys
-        # bind = $mainMod, left, movefocus, l
-        # bind = $mainMod, right, movefocus, r
-        # bind = $mainMod, up, movefocus, u
-        # bind = $mainMod, down, movefocus, d
-        # 
-        # # Switch workspaces with mainMod + [0-9]
-        # bind = $mainMod, 1, workspace, 1
-        # bind = $mainMod, 2, workspace, 2
-        # bind = $mainMod, 3, workspace, 3
-        # bind = $mainMod, 4, workspace, 4
-        # bind = $mainMod, 5, workspace, 5
-        # bind = $mainMod, 6, workspace, 6
-        # bind = $mainMod, 7, workspace, 7
-        # bind = $mainMod, 8, workspace, 8
-        # bind = $mainMod, 9, workspace, 9
-        # bind = $mainMod, 0, workspace, 10
-        # 
-        # # Move active window to a workspace with mainMod + SHIFT + [0-9]
-        # bind = $mainMod SHIFT, 1, movetoworkspace, 1
-        # bind = $mainMod SHIFT, 2, movetoworkspace, 2
-        # bind = $mainMod SHIFT, 3, movetoworkspace, 3
-        # bind = $mainMod SHIFT, 4, movetoworkspace, 4
-        # bind = $mainMod SHIFT, 5, movetoworkspace, 5
-        # bind = $mainMod SHIFT, 6, movetoworkspace, 6
-        # bind = $mainMod SHIFT, 7, movetoworkspace, 7
-        # bind = $mainMod SHIFT, 8, movetoworkspace, 8
-        # bind = $mainMod SHIFT, 9, movetoworkspace, 9
-        # bind = $mainMod SHIFT, 0, movetoworkspace, 10
-        # 
+        # # Move focus with mod + arrow keys
+        # bind = $mod, left, movefocus, l
+        # bind = $mod, right, movefocus, r
+        # bind = $mod, up, movefocus, u
+        # bind = $mod, down, movefocus, d
+        
+        # Switch workspaces with mod + [0-9]
+        "$mod, 1, workspace, 1"
+        "$mod, 2, workspace, 2"
+        "$mod, 3, workspace, 3"
+        "$mod, 4, workspace, 4"
+        "$mod, 5, workspace, 5"
+        "$mod, 6, workspace, 6"
+        "$mod, 7, workspace, 7"
+        "$mod, 8, workspace, 8"
+        "$mod, 9, workspace, 9"
+        "$mod, 0, workspace, 10"
+        
+        # Move active window to a workspace with mod + SHIFT + [0-9]
+        "$mod SHIFT, 1, movetoworkspace, 1"
+        "$mod SHIFT, 2, movetoworkspace, 2"
+        "$mod SHIFT, 3, movetoworkspace, 3"
+        "$mod SHIFT, 4, movetoworkspace, 4"
+        "$mod SHIFT, 5, movetoworkspace, 5"
+        "$mod SHIFT, 6, movetoworkspace, 6"
+        "$mod SHIFT, 7, movetoworkspace, 7"
+        "$mod SHIFT, 8, movetoworkspace, 8"
+        "$mod SHIFT, 9, movetoworkspace, 9"
+        "$mod SHIFT, 0, movetoworkspace, 10"
+        
         # # Example special workspace (scratchpad)
-        # bind = $mainMod, N, togglespecialworkspace, magic
-        # bind = $mainMod SHIFT, N, movetoworkspace, special:magic
+        # bind = $mod, N, togglespecialworkspace, magic
+        # bind = $mod SHIFT, N, movetoworkspace, special:magic
         # 
-        # # Scroll through existing workspaces with mainMod + scroll
-        # bind = $mainMod, mouse_down, workspace, e+1
-        # bind = $mainMod, mouse_up, workspace, e-1
+        # # Scroll through existing workspaces with mod + scroll
+        # bind = $mod, mouse_down, workspace, e+1
+        # bind = $mod, mouse_up, workspace, e-1
         # 
-        # # Move/resize windows with mainMod + LMB/RMB and dragging
-        # bindm = $mainMod, mouse:272, movewindow
-        # bindm = $mainMod, mouse:273, resizewindow
+        # # Move/resize windows with mod + LMB/RMB and dragging
+        # bindm = $mod, mouse:272, movewindow
+        # bindm = $mod, mouse:273, resizewindow
         # 
         # # Laptop multimedia keys for volume and LCD brightness
         # bindel = ,XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+

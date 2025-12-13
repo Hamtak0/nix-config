@@ -25,6 +25,7 @@
     ./nh.nix
     ./yazi.nix
     ./programs
+    ./packages
   ];
 
   nixpkgs = {
