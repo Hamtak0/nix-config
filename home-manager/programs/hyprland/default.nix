@@ -28,7 +28,7 @@
         follow_mouse = 1;
         sensitivity = 0;
         accel_profile = "flat";
-	natural_scroll = true;
+	touchpad.natural_scroll = true;
       };
 
       general = {
@@ -122,9 +122,9 @@
 
       binde = [
         "$mod CTRL, h, layoutmsg, colresize -conf"
-        "$mod CTRL, h, layoutmsg, colresize -0.2"
-        "$mod CTRL, h, layoutmsg, colresize +0.2"
-        "$mod CTRL, h, layoutmsg, colresize +conf"
+        "$mod CTRL, j, layoutmsg, colresize -0.2"
+        "$mod CTRL, k, layoutmsg, colresize +0.2"
+        "$mod CTRL, l, layoutmsg, colresize +conf"
 
         "$mod, Tab, layoutmsg, move +col"
         "$mod SHIFT, Tab, layoutmsg, move -col"

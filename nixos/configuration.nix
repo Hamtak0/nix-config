@@ -141,10 +141,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  services.libinput = {
-    enable = true;
-    touchpad.naturalScrolling = true;
-  };
+  services.libinput.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
