@@ -26,6 +26,7 @@
     ./yazi.nix
     ./programs
     ./packages
+    ./i18n.nix
   ];
 
   nixpkgs = {
@@ -70,6 +71,9 @@
     brave
     discord
     devenv
+    nixfmt
+    wireshark
+    pavucontrol
   ];
 
   programs.home-manager.enable = true;

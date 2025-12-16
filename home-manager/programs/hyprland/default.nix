@@ -10,7 +10,7 @@
     portalPackage = null;
     systemd.enable = false;
     plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling 
+      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
     ];
     settings = {
       monitor = [
@@ -20,15 +20,15 @@
       ];
 
       input = {
-        kb_layout = "us,th";
-	kb_options = "grp:win_space_toggle";
-	numlock_by_default = true;
-	repeat_rate = 40;
+        kb_layout = "us,jp";
+        kb_options = "grp:win_space_toggle";
+        numlock_by_default = true;
+        repeat_rate = 40;
         repeat_delay = 275;
         follow_mouse = 1;
         sensitivity = 0;
         accel_profile = "flat";
-	touchpad.natural_scroll = true;
+        touchpad.natural_scroll = true;
       };
 
       general = {
@@ -41,15 +41,16 @@
 
       plugin = {
         hyprscrolling = {
-	  fullscreen_on_one_column = true;
-	  focus_fit_method = 1;
-	};
+          # fullscreen_on_one_column = true;
+          column_width = 1;
+          focus_fit_method = 1;
+        };
       };
 
       decoration = {
         rounding = 8;
-	active_opacity = 1.0;
-	inactive_opacity = 0.96;
+        active_opacity = 1.0;
+        inactive_opacity = 0.96;
         blur = {
           enabled = true;
           size = 2;
@@ -79,13 +80,13 @@
       # animations {
       #     enabled = true # please :)
       #     # Default animations, see https://wiki.hypr.land/Configuring/Animations/ for more
-      # 
+      #
       #     bezier = easeOutQuint,0.23,1,0.32,1
       #     bezier = easeInOutCubic,0.65,0.05,0.36,1
       #     bezier = linear,0,0,1,1
       #     bezier = almostLinear,0.5,0.5,0.75,1.0
       #     bezier = quick,0.15,0,0.1,1
-      # 
+      #
       #     animation = global, 1, 10, default
       #     animation = border, 1, 5.39, easeOutQuint
       #     animation = windows, 1, 4.79, easeOutQuint
@@ -106,11 +107,11 @@
 
       # See https://wiki.hypr.land/Configuring/Window-Rules/ for more
       # See https://wiki.hypr.land/Configuring/Workspace-Rules/ for workspace rules
-       
+
       windowrulev2 = [
         # Ignore maximize requests from apps. You'll probably like this.
         "suppressevent maximize, class:.*"
-         
+
         # Fix some dragging issues with XWayland
         "nofocus,class:^$,title:^$,xwayland:1,floating:1,fullscreen:0,pinned:0"
       ];
@@ -131,16 +132,17 @@
       ];
 
       bind = [
-	"$mod, w, killactive"
-	"$mod, r, exec, uwsm-app -- rofi -show drun -show-icons"
-	"$mod, a, exec, uwsm-app -- rofi -show run -show-icons"
+        "$mod, w, killactive"
+        "$mod, r, exec, uwsm-app -- rofi -show drun -show-icons"
+        "$mod, a, exec, uwsm-app -- rofi -show run -show-icons"
+        "$mod, l, exec, uwsm-app -- hyprlock"
 
-	"$mod, Return, exec, uwsm-app -- $term"
+        "$mod, Return, exec, uwsm-app -- $term"
 
-	# Screenshot fn+f6
-	"$mod Shift_L, s, exec, uwsm-app -- grimblast --notify copysave area"
-	" , Print, exec, uwsm-app -- grimblast --notify copysave screen"
-    	"$mod, Print, exec, uwsm-app -- grimblast --notify copysave active"
+        # Screenshot fn+f6
+        "$mod Shift_L, s, exec, uwsm-app -- grimblast --notify copysave area"
+        " , Print, exec, uwsm-app -- grimblast --notify copysave screen"
+        "$mod, Print, exec, uwsm-app -- grimblast --notify copysave active"
 
         # # Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
         # bind = $mod, Return, exec, $terminal
@@ -153,13 +155,13 @@
         # #bind = $mod, S, exec, $menu
         # #bind = $mod, P, pseudo, # dwindle
         # #bind = $mod, J, togglesplit, # dwindle
-        # 
+        #
         # # Move focus with mod + arrow keys
         # bind = $mod, left, movefocus, l
         # bind = $mod, right, movefocus, r
         # bind = $mod, up, movefocus, u
         # bind = $mod, down, movefocus, d
-        
+
         # Switch workspaces with mod + [0-9]
         "$mod, 1, workspace, 1"
         "$mod, 2, workspace, 2"
@@ -171,7 +173,7 @@
         "$mod, 8, workspace, 8"
         "$mod, 9, workspace, 9"
         "$mod, 0, workspace, 10"
-        
+
         # Move active window to a workspace with mod + SHIFT + [0-9]
         "$mod SHIFT, 1, movetoworkspace, 1"
         "$mod SHIFT, 2, movetoworkspace, 2"
@@ -183,33 +185,35 @@
         "$mod SHIFT, 8, movetoworkspace, 8"
         "$mod SHIFT, 9, movetoworkspace, 9"
         "$mod SHIFT, 0, movetoworkspace, 10"
-        
-        # # Example special workspace (scratchpad)
-        # bind = $mod, N, togglespecialworkspace, magic
-        # bind = $mod SHIFT, N, movetoworkspace, special:magic
-        # 
-        # # Scroll through existing workspaces with mod + scroll
-        # bind = $mod, mouse_down, workspace, e+1
-        # bind = $mod, mouse_up, workspace, e-1
-        # 
-        # # Move/resize windows with mod + LMB/RMB and dragging
-        # bindm = $mod, mouse:272, movewindow
-        # bindm = $mod, mouse:273, resizewindow
-        # 
-        # # Laptop multimedia keys for volume and LCD brightness
-        # bindel = ,XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
-        # bindel = ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-        # bindel = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-        # bindel = ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
-        # bindel = ,XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+
-        # bindel = ,XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-
-        # 
-        # # Requires playerctl
-        # bindl = , XF86AudioNext, exec, playerctl next
-        # bindl = , XF86AudioPause, exec, playerctl play-pause
-        # bindl = , XF86AudioPlay, exec, playerctl play-pause
-        # bindl = , XF86AudioPrev, exec, playerctl previous
       ];
+
+      # # Example special workspace (scratchpad)
+      # bind = $mod, N, togglespecialworkspace, magic
+      # bind = $mod SHIFT, N, movetoworkspace, special:magic
+      #
+      # # Scroll through existing workspaces with mod + scroll
+      # bind = $mod, mouse_down, workspace, e+1
+      # bind = $mod, mouse_up, workspace, e-1
+      #
+      # # Move/resize windows with mod + LMB/RMB and dragging
+      # bindm = $mod, mouse:272, movewindow
+      # bindm = $mod, mouse:273, resizewindow
+
+      # Laptop multimedia keys for volume and LCD brightness
+      bindel = [
+        " ,XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
+        " ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+        " ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        " ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+        " ,XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+"
+        " ,XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-"
+      ];
+
+      # # Requires playerctl
+      # bindl = , XF86AudioNext, exec, playerctl next
+      # bindl = , XF86AudioPause, exec, playerctl play-pause
+      # bindl = , XF86AudioPlay, exec, playerctl play-pause
+      # bindl = , XF86AudioPrev, exec, playerctl previous
     };
   };
 }
