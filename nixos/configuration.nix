@@ -25,6 +25,7 @@
     ./bluetooth.nix
     ./users.nix
     ./hardware-configuration.nix
+    # ./greetd.nix
     ./programs
     # ./steam.nix
 
