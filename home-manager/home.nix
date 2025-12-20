@@ -18,13 +18,13 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    # ./steam.nix
+
+    ./programs
     ./fish.nix
     ./git.nix
     ./fastfetch.nix
     ./nh.nix
     ./yazi.nix
-    ./programs
     ./packages
     ./i18n.nix
   ];
@@ -66,15 +66,7 @@
   };
 
   # Add stuff for your user as you see fit:
-  home.packages = with pkgs; [
-    steam
-    brave
-    discord
-    devenv
-    nixfmt
-    wireshark
-    pavucontrol
-  ];
+  home.packages = with pkgs; [];
 
   programs.home-manager.enable = true;
 

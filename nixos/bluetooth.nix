@@ -11,7 +11,7 @@
         Experimental = false;
         # When enabled other devices can connect faster to us, however
         # the tradeoff is increased power consumption. Defaults to
-        # 'false'.
+        # 'false'. Personally recommended.
         FastConnectable = true;
       };
       Policy = {
