@@ -1,5 +1,6 @@
 {
   imports = [
+    ./anki.nix
     ./brave.nix
     ./discord.nix
     ./devenv.nix
