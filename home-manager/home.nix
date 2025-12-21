@@ -21,6 +21,7 @@
 
     ./programs
     ./fish.nix
+    ./fonts
     ./git.nix
     ./fastfetch.nix
     ./nh.nix

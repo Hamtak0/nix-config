@@ -1,11 +1,11 @@
 { pkgs, ... }:
 {
-  home.packages = [ 
-  pkgs.noto-fonts 
-  pkgs.noto-fonts-cjk-sans
-  pkgs.noto-fonts-cjk-serif
-  pkgs.noto-fonts-color-emoji
-  pkgs.liberation_ttf
+  home.packages = [
+    pkgs.noto-fonts
+    pkgs.noto-fonts-cjk-sans
+    pkgs.noto-fonts-cjk-serif
+    pkgs.noto-fonts-color-emoji
+    pkgs.liberation_ttf
   ];
 
   fonts.fontconfig = {
@@ -18,7 +18,7 @@
       sansSerif = [
         "Noto Sans"
         "Noto Sans Thai"
-	"Noto Sans JP"
+        "Noto Sans JP"
       ];
     };
   };
