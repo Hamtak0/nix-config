@@ -21,7 +21,6 @@
     # ./users.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
-    ./fonts.nix
     ./bluetooth.nix
     ./users.nix
     ./hardware-configuration.nix
