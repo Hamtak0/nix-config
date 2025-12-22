@@ -18,12 +18,16 @@
 
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
-    ./rofi.nix
+
+    ./programs
     ./fish.nix
+    ./fonts
     ./git.nix
     ./fastfetch.nix
     ./nh.nix
     ./yazi.nix
+    ./packages
+    ./i18n.nix
   ];
 
   nixpkgs = {
@@ -48,6 +52,12 @@
     config = {
       # Disable if you don't want unfree packages
       allowUnfree = true;
+      # allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+#	"steam"
+# 	"steam-original"
+#	"steam-unwrapped"
+#	"steam-run"
+      # ];
     };
   };
 
@@ -57,7 +67,8 @@
   };
 
   # Add stuff for your user as you see fit:
-  home.packages = with pkgs; [steam brave];
+  home.packages = with pkgs; [];
+
   programs.home-manager.enable = true;
 
   # Nicely reload system units when changing configs

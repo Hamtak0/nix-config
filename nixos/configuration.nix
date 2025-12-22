@@ -22,7 +22,11 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./bluetooth.nix
+    ./users.nix
     ./hardware-configuration.nix
+    # ./greetd.nix
+    ./programs
+    # ./steam.nix
 
     inputs.home-manager.nixosModules.home-manager
   ];
@@ -70,6 +74,8 @@
       flake-registry = "";
       # Workaround for https://github.com/NixOS/nix/issues/9574
       nix-path = config.nix.nixPath;
+
+      extra-trusted-users = [ "tako" ];
     };
     # Opinionated: disable channels
     channel.enable = false;
@@ -90,7 +96,13 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocales = [
+    "th_TH.UTF-8/UTF-8"
+    "ja_JP.UTF-8/UTF-8"
+  ];
+
+
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
@@ -115,22 +127,6 @@
   #   pulse.enable = true;
   # };
 
-  users.users = {
-    tako = {
-      # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
-      # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "horse69";
-      isNormalUser = true;
-      openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
-      ];
-      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["wheel" "video" "input"];
-
-      shell = pkgs.fish;
-    };
-  };
-
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
   services.openssh = {
@@ -145,7 +141,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
+  services.libinput.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -187,14 +183,17 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
 
   programs = {
-    neovim.enable = true;
-    hyprland.enable = true;
     foot.enable = true;
     light.enable = true;
     git.enable = true;
     fish.enable = true;
     tmux.enable = true;
+    direnv.enable = true;
   };
+
+  environment.systemPackages = [
+    pkgs.brightnessctl
+  ];
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";
