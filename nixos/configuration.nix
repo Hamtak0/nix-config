@@ -22,10 +22,10 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./bluetooth.nix
+    ./greeter.nix
     ./users.nix
     ./hardware-configuration.nix
     ./programs
-    ./sddm.nix
     # ./steam.nix
 
     inputs.home-manager.nixosModules.home-manager
