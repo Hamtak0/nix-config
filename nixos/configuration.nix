@@ -24,8 +24,8 @@
     ./bluetooth.nix
     ./users.nix
     ./hardware-configuration.nix
-    # ./greetd.nix
     ./programs
+    ./sddm.nix
     # ./steam.nix
 
     inputs.home-manager.nixosModules.home-manager

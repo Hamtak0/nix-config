@@ -1,6 +1,0 @@
-{
-  services.greetd = {
-    enable = true;
-
-  };
-}
