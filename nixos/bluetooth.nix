@@ -5,6 +5,8 @@
     settings = {
       General = {
       	# Fix frequent Bluetooth audio dropouts
+	#ControllerMode = "dual";
+	# Personally, I recommend using the SBC-XQ codec for Airpods in pavucontrol
 	ControllerMode = "bredr";
         # Shows battery charge of connected devices on supported
         # Bluetooth adapters. Defaults to 'false'.
