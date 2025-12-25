@@ -9,6 +9,7 @@
     ./nixfmt.nix
     ./nix-index.nix
     ./pavucontrol.nix
+    ./ripgrep.nix
     ./steam.nix
     ./wireshark.nix
   ];
