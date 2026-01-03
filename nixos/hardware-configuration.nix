@@ -56,6 +56,8 @@
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
+  # ---- Graphics Configuration ----
+
   hardware.graphics = {
     enable = true;
   };
@@ -69,7 +71,14 @@
   #   powerManagement.finegrained = false;
   #   open = true;
   #   nvidiaSettings = true;
-  #   package = config.boot.kernelPackages.nvidiaPackages.stable;
+  #   package = config.boot.kernelPackages.nvidiaPackages.stable; # Same as production
+  #   # package = config.boot.kernelPackages.nvidiaPackages.production; # Latest production driver
+  #   # package = config.boot.kernelPackages.nvidiaPackages.beta;   # Latest beta driver
+  #   # package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
+  #   # package = config.boot.kernelPackages.nvidiaPackages.legacy_535; # Older versions
+  #   # package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+  #   # package = config.boot.kernelPackages.nvidiaPackages.legacy_390;
+  #   # package = config.boot.kernelPackages.nvidiaPackages.legacy_340;
   # };
   # 
   # hardware.nvidia.prime = {

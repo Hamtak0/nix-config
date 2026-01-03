@@ -20,8 +20,8 @@
       ];
 
       input = {
-        kb_layout = "us,jp";
-        kb_options = "grp:win_space_toggle";
+        kb_layout = "us"; # th, jp
+        # kb_options = "grp:win_space_toggle";
         numlock_by_default = true;
         repeat_rate = 40;
         repeat_delay = 275;
