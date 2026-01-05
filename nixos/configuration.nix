@@ -22,6 +22,7 @@
 
     # Import your generated (nixos-generate-config) hardware configuration
     ./bluetooth.nix
+    ./graphics.nix
     ./greeter.nix
     ./users.nix
     ./hardware-configuration.nix
@@ -194,6 +195,10 @@
   environment.systemPackages = [
     pkgs.brightnessctl
   ];
+
+  # enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable
+  # https://nixos.wiki/wiki/Wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1"; 
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";
