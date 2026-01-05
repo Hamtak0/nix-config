@@ -9,15 +9,15 @@ let
 in
 {
   # tuigreet settings
-  services.greetd = {
-    enable = false;
-    #settings = {
-    #  default_session = {
-    #    command = "${tuigreet} --time --remember --remember-session --sessions ${hyprland-session}";
-    #    user = "greeter";
-    #  };
-    #};
-  };
+  #services.greetd = {
+  #  enable = true;
+  #  #settings = {
+  #  #  default_session = {
+  #  #    command = "${tuigreet} --time --remember --remember-session --sessions ${hyprland-session}";
+  #  #    user = "greeter";
+  #  #  };
+  #  #};
+  #};
   # this is a life saver.
   # literally no documentation about this anywhere.
   # might be good to write about this...
@@ -31,7 +31,6 @@ in
   #  TTYReset = true;
   #  TTYVHangup = true;
   #  TTYVTDisallocate = true;
-
   #};
 
   # sddm settings
