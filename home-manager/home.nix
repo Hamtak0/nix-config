@@ -28,6 +28,7 @@
     ./yazi.nix
     ./packages
     ./i18n.nix
+    ./services
   ];
 
   nixpkgs = {

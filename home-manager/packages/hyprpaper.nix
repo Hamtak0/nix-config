@@ -1,4 +1,6 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.hyprpaper ];
+  home.packages = [
+    pkgs.hyprpaper
+  ];
 }
