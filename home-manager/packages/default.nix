@@ -6,6 +6,7 @@
     ./devenv.nix
     ./grimblast.nix
     ./hyprpaper.nix
+    ./libreoffice.nix
     ./nixfmt.nix
     ./nix-index.nix
     ./pavucontrol.nix
