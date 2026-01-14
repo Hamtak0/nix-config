@@ -7,7 +7,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   # You can import other home-manager modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/home-manager):
@@ -19,15 +20,10 @@
     # You can also split up your configuration and import pieces of it here:
     # ./nvim.nix
 
-    ./programs
-    ./fish.nix
     ./fonts
-    ./git.nix
-    ./fastfetch.nix
-    ./nh.nix
-    ./yazi.nix
-    ./packages
     ./i18n.nix
+    ./packages
+    ./programs
     ./services
   ];
 
@@ -54,10 +50,10 @@
       # Disable if you don't want unfree packages
       allowUnfree = true;
       # allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-#	"steam"
-# 	"steam-original"
-#	"steam-unwrapped"
-#	"steam-run"
+      #	"steam"
+      # 	"steam-original"
+      #	"steam-unwrapped"
+      #	"steam-run"
       # ];
     };
   };
@@ -68,7 +64,7 @@
   };
 
   # Add stuff for your user as you see fit:
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [ ];
 
   programs.home-manager.enable = true;
 
