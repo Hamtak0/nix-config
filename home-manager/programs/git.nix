@@ -2,6 +2,10 @@
 {
   programs.git = {
     enable = true;
+    signing = {
+      key = "~/.ssh/id_ed25519.github.Hamtak0.pub";
+      signByDefault = true;
+    };
     settings = {
       user = {
         name = "Hamtak0";
@@ -10,6 +14,10 @@
       init.defaultBranch = "main";
       core = {
         sshCommand = "ssh -o IdentitiesOnly=yes -i ~/.ssh/id_ed25519.github.Hamtak0";
+      };
+      gpg.format = "ssh";
+      alias = {
+        s = "status";
       };
     };
   };
