@@ -5,13 +5,14 @@
     ./discord.nix
     ./devenv.nix
     ./grimblast.nix
-    ./hyprpaper.nix
+    # ./hyprpaper.nix
     ./libreoffice.nix
     ./nixfmt.nix
     ./nix-index.nix
     ./pavucontrol.nix
     ./ripgrep.nix
     ./steam.nix
+    ./swww.nix
     ./wireshark.nix
   ];
 }
