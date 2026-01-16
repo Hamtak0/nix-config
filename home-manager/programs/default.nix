@@ -8,7 +8,6 @@
     # ./nixvim.nix
     ./nh.nix
     ./rofi.nix
-    ./ssh.nix
     ./yazi.nix
     ./zed.nix
   ];

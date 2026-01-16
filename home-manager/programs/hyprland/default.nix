@@ -123,7 +123,7 @@
         # Fix some dragging issues with XWayland
         "no_focus on, match:class ^$,match:title ^$,match:xwayland 1,match:float 1,match:fullscreen 0,match:pin 0"
 
-	"tile on, match:class brave"
+	"tile on, match:class brave-browser"
       ];
 
       "$mod" = "SUPER";
