@@ -123,7 +123,8 @@
         # Fix some dragging issues with XWayland
         "no_focus on, match:class ^$,match:title ^$,match:xwayland 1,match:float 1,match:fullscreen 0,match:pin 0"
 
-	"tile on, match:class brave-browser"
+        # "float on, match:class ^(brave-browser|org.pulseaudio.pavucontrol)$"
+        "tile on, match:class ^(brave-browser)$"
       ];
 
       "$mod" = "SUPER";
@@ -195,19 +196,21 @@
         "$mod SHIFT, 8, movetoworkspace, 8"
         "$mod SHIFT, 9, movetoworkspace, 9"
         "$mod SHIFT, 0, movetoworkspace, 10"
+
+        # Scroll through existing workspaces with mod + scroll
+        # "$mod, mouse_down, workspace, e+1"
+        # "$mod, mouse_up, workspace, e-1"
       ];
 
       # # Example special workspace (scratchpad)
       # bind = $mod, N, togglespecialworkspace, magic
       # bind = $mod SHIFT, N, movetoworkspace, special:magic
-      #
-      # # Scroll through existing workspaces with mod + scroll
-      # bind = $mod, mouse_down, workspace, e+1
-      # bind = $mod, mouse_up, workspace, e-1
-      #
-      # # Move/resize windows with mod + LMB/RMB and dragging
-      # bindm = $mod, mouse:272, movewindow
-      # bindm = $mod, mouse:273, resizewindow
+
+      # Move/resize windows with mod + LMB/RMB and dragging
+      bindm = [
+        "$mod, mouse:272, movewindow"
+        "$mod, mouse:273, resizewindow"
+      ];
 
       # Laptop multimedia keys for volume and LCD brightness
       bindel = [
