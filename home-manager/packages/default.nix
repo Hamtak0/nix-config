@@ -6,7 +6,9 @@
     ./devenv.nix
     ./grimblast.nix
     # ./hyprpaper.nix
+    ./imagemagick.nix
     ./libreoffice.nix
+    # ./minicom.nix # Modem control and terminal emulation program
     ./nixfmt.nix
     ./nix-index.nix
     ./pavucontrol.nix
