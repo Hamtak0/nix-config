@@ -6,6 +6,10 @@
     pkgs.noto-fonts-cjk-serif
     pkgs.noto-fonts-color-emoji
     pkgs.liberation_ttf
+
+    pkgs.corefonts # Microsoft web fonts
+    # pkgs.vista-fonts # Microsoft vista fonts
+    # pkgs.googlesans-code
   ];
 
   fonts.fontconfig = {
