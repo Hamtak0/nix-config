@@ -18,6 +18,7 @@
       serif = [
         "Noto Serif"
         "Noto Serif Thai"
+        "Noto Serif JP"
       ];
       sansSerif = [
         "Noto Sans"
