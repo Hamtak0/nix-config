@@ -7,6 +7,7 @@
     ./git.nix
     ./hyprland
     ./hyprlock.nix
+    ./mpv.nix
     ./nh.nix
     ./nix-index.nix
     # ./nixvim.nix
