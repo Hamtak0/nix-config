@@ -69,6 +69,11 @@
         dim_special = 0.5;
       };
 
+      misc = {
+        disable_hyprland_logo = true;
+        disable_splash_rendering = true;
+      };
+
       animations = {
         enabled = true;
         animation = [
