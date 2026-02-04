@@ -10,6 +10,8 @@
     pkgs.corefonts # Microsoft web fonts
     # pkgs.vista-fonts # Microsoft vista fonts
     # pkgs.googlesans-code
+
+    pkgs.sarabun-font
   ];
 
   fonts.fontconfig = {
