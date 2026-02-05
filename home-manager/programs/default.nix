@@ -15,5 +15,6 @@
     ./rofi.nix
     ./yazi.nix
     ./zed.nix
+    ./zoxide.nix
   ];
 }
