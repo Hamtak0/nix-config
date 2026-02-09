@@ -14,6 +14,7 @@
     ./ripgrep.nix
     ./rofi.nix
     ./yazi.nix
+    ./zathura.nix
     ./zed.nix
     ./zoxide.nix
   ];
