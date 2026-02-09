@@ -8,6 +8,7 @@
     ./nixfmt.nix
     ./pavucontrol.nix
     ./steam.nix
+    ./typst.nix
     ./wireshark.nix
   ];
 }
