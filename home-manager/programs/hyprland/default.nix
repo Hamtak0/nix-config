@@ -143,8 +143,9 @@
         "$mod CTRL, k, layoutmsg, colresize +0.2"
         "$mod CTRL, l, layoutmsg, colresize +conf"
 
-        "$mod, Tab, layoutmsg, move +col"
-        "$mod SHIFT, Tab, layoutmsg, move -col"
+	# Focus panel columns
+        "ALT, Tab, layoutmsg, move +col"
+        "ALT SHIFT, Tab, layoutmsg, move -col"
       ];
 
       bind = [
