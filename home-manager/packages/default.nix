@@ -2,6 +2,7 @@
   imports = [
     ./brave.nix
     ./devenv.nix
+    ./dolphin.nix
     ./grimblast.nix
     ./imagemagick.nix
     ./libreoffice.nix
