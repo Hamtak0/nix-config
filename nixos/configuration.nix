@@ -7,7 +7,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   # You can import other NixOS modules here
   imports = [
     # If you want to use modules your own flake exports (from modules/nixos):
@@ -28,13 +29,13 @@
     ./hardware-configuration.nix
     ./programs
     ./locale.nix
-    # ./steam.nix
+    ./steam.nix
 
     inputs.home-manager.nixosModules.home-manager
   ];
 
   home-manager = {
-    extraSpecialArgs = {inherit inputs outputs;};
+    extraSpecialArgs = { inherit inputs outputs; };
     users = {
       # Import your home-manager configuration
       tako = import ../home-manager/home.nix;
@@ -66,26 +67,28 @@
     };
   };
 
-  nix = let
-    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-  in {
-    settings = {
-      # Enable flakes and new 'nix' command
-      experimental-features = "nix-command flakes";
-      # Opinionated: disable global registry
-      flake-registry = "";
-      # Workaround for https://github.com/NixOS/nix/issues/9574
-      nix-path = config.nix.nixPath;
+  nix =
+    let
+      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+    in
+    {
+      settings = {
+        # Enable flakes and new 'nix' command
+        experimental-features = "nix-command flakes";
+        # Opinionated: disable global registry
+        flake-registry = "";
+        # Workaround for https://github.com/NixOS/nix/issues/9574
+        nix-path = config.nix.nixPath;
 
-      extra-trusted-users = [ "tako" ];
+        extra-trusted-users = [ "tako" ];
+      };
+      # Opinionated: disable channels
+      channel.enable = false;
+
+      # Opinionated: make flake registry and nix path match flake inputs
+      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
+      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
     };
-    # Opinionated: disable channels
-    channel.enable = false;
-
-    # Opinionated: make flake registry and nix path match flake inputs
-    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
-    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-  };
 
   networking.hostName = "hamham"; # Define your hostname.
   # Configure network connections interactively with nmcli or nmtui.
@@ -198,7 +201,7 @@
 
   # enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable
   # https://nixos.wiki/wiki/Wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1"; 
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";
