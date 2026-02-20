@@ -11,7 +11,7 @@
 #   services.battery-notifier.enable = true;
 #
 #   # Optional: customize thresholds and battery device
-#   # services.battery-notifier.midThreshold = 50;
+#   # services.battery-notifier.notCharging = 50;
 #   # services.battery-notifier.lowThreshold = 25;
 #   # services.battery-notifier.criticalThreshold = 15;
 #   # services.battery-notifier.batteryDevice = "BAT1";
@@ -40,7 +40,7 @@ let
 
     # --- Configuration ---
     BATTERY_PATH="/sys/class/power_supply/${cfg.batteryDevice}"
-    MID_THRESHOLD=${toString cfg.midThreshold}
+    NOT_CHARGING=${toString cfg.notCharging}
     LOW_THRESHOLD=${toString cfg.lowThreshold}
     CRITICAL_THRESHOLD=${toString cfg.criticalThreshold}
 
@@ -85,13 +85,13 @@ let
 
     # Low notification
     elif [ "$CAPACITY" -le "$LOW_THRESHOLD" ] && [ "$LAST_NOTIFIED_LEVEL" -gt "$LOW_THRESHOLD" ]; then
-      send_notification "low" "Battery Low (''${CAPACITY}%)" "Consider plugging in your charger." "$LOW_THRESHOLD"
+      send_notification "normal" "Battery Low (''${CAPACITY}%)" "Consider plugging in your charger." "$LOW_THRESHOLD"
 
-    elif [ "$CAPACITY" -le "$MID_THRESHOLD" ] && [ "$LAST_NOTIFIED_LEVEL" -gt "$MID_THRESHOLD" ]; then
-      send_notification "normal" "Battery Half (''${CAPACITY}%)" "The battery didn't charged." "$MID_THRESHOLD"
+    elif [ "$CAPACITY" -le "$NOT_CHARGING" ] && [ "$LAST_NOTIFIED_LEVEL" -gt "$NOT_CHARGING" ]; then
+      send_notification "low" "Battery Half (''${CAPACITY}%)" "The battery didn't charged." "$NOT_CHARGING"
 
     # Reset state if battery is charged above the low threshold
-    elif [ "$CAPACITY" -gt "$MID_THRESHOLD" ]; then
+    elif [ "$CAPACITY" -gt "$NOT_CHARGING" ]; then
       echo "100" > "$STATE_FILE"
     fi
   '';
@@ -101,10 +101,10 @@ in
   # This section defines the configuration options that users can set.
   options.services.battery-notifier = {
     enable = mkEnableOption "battery notification service";
-    midThreshold = mkOption {
+    notCharging = mkOption {
       type = types.int;
-      default = 50;
-      description = "The battery percentage to trigger a mid battery notification.";
+      default = 70;
+      description = "The battery percentage to trigger a not charging notification.";
     };
 
     lowThreshold = mkOption {

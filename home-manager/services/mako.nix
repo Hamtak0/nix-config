@@ -11,13 +11,13 @@
       "urgency=low" = {
         background-color = "#1e1e1eAA";
         border-color = "#444444ff";
-        default-timeout = 5000;
+        default-timeout = 10000;
       };
 
       "urgency=normal" = {
         background-color = "#1E1E2EAA";
         border-color = "#a6a6ff";
-        default-timeout = 10000;
+        default-timeout = 15000;
       };
 
       "urgency=critical" = {
