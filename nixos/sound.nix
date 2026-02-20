@@ -1,7 +1,7 @@
 {
   security.rtkit.enable = true;
 
-  service.pipewire = {
+  services.pipewire = {
     enable = true;
     alsa = {
       enable = true;

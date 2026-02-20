@@ -25,11 +25,14 @@
     ./bluetooth.nix
     ./graphics.nix
     ./greeter.nix
-    ./users.nix
     ./hardware-configuration.nix
-    ./programs
     ./locale.nix
+    ./packages
+    ./programs
+    ./services
+    ./sound.nix
     ./steam.nix
+    ./users.nix
 
     inputs.home-manager.nixosModules.home-manager
   ];
