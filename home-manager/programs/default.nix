@@ -2,6 +2,7 @@
   imports = [
     ./anki.nix
     ./discord.nix
+    ./eza.nix
     ./fastfetch.nix
     ./fish.nix
     ./git.nix

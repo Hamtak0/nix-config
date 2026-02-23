@@ -12,6 +12,7 @@
 
     shellAliases = {
       cd = "z";
+      ls = "eza";
     };
   };
 }
