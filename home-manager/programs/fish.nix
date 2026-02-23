@@ -4,7 +4,6 @@
 
     shellAbbrs = {
       ni = "nh os switch /etc/nix-config";
-      y = "yazi";
       cdn = "z /etc/nix-config";
       mh = "man home-configuration.nix";
       mc = "man configuration.nix";
