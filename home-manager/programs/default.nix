@@ -10,6 +10,7 @@
     ./hyprlock.nix
     ./mpv.nix
     ./nh.nix
+    ./nix-index-database.nix
     ./nix-index.nix
     # ./nixvim.nix
     ./ripgrep.nix

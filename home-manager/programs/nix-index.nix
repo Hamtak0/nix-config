@@ -1,4 +1,6 @@
-{ ... }:
 {
-  programs.nix-index.enable = true;
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 }
