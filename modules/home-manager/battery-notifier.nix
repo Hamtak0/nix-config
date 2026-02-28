@@ -88,7 +88,7 @@ let
       send_notification "normal" "Battery Low (''${CAPACITY}%)" "Consider plugging in your charger." "$LOW_THRESHOLD"
 
     elif [ "$CAPACITY" -le "$NOT_CHARGING" ] && [ "$LAST_NOTIFIED_LEVEL" -gt "$NOT_CHARGING" ]; then
-      send_notification "low" "Battery Half (''${CAPACITY}%)" "The battery didn't charged." "$NOT_CHARGING"
+      send_notification "low" "Battery Notice (''${CAPACITY}%)" "The battery didn't charged." "$NOT_CHARGING"
 
     # Reset state if battery is charged above the low threshold
     elif [ "$CAPACITY" -gt "$NOT_CHARGING" ]; then
