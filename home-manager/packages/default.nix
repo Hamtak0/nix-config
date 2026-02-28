@@ -3,6 +3,7 @@
     ./brave.nix
     ./devenv.nix
     ./dolphin.nix
+    ./ffmpeg.nix
     ./grimblast.nix
     ./imagemagick.nix
     ./libreoffice.nix
