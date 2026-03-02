@@ -11,19 +11,27 @@
       "urgency=low" = {
         background-color = "#1e1e1eAA";
         border-color = "#444444ff";
-        default-timeout = 10000;
+        default-timeout = 5000;
       };
 
       "urgency=normal" = {
         background-color = "#1E1E2EAA";
         border-color = "#a6a6ff";
-        default-timeout = 15000;
+        default-timeout = 10000;
       };
 
       "urgency=critical" = {
-        border-color = "#ffa6a6FF";
         background-color = "#2e1e1eAA";
+        border-color = "#ffa6a6FF";
         default-timeout = 0;
+      };
+
+      # Extra app-name config
+      # Bluetooth (blueman):
+      "app-name=blueman" = {
+        background-color = "#000000";
+        border-color = "#0082FC";
+        default-timeout = 4000;
       };
     };
   };
