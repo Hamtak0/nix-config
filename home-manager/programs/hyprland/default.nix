@@ -17,9 +17,6 @@
     package = null;
     portalPackage = null;
     systemd.enable = false;
-    plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
-    ];
     settings = {
       monitor = [
         # "desc:Chimei Innolux Corporation 0x1521, preferred, auto, 1"
@@ -47,12 +44,10 @@
         allow_tearing = true;
       };
 
-      plugin = {
-        hyprscrolling = {
-          # fullscreen_on_one_column = true;
-          column_width = 1;
-          focus_fit_method = 1;
-        };
+      scrolling = {
+        fullscreen_on_one_column = false;
+        column_width = 1;
+        focus_fit_method = 1;
       };
 
       decoration = {
@@ -143,9 +138,14 @@
         "$mod CTRL, k, layoutmsg, colresize +0.2"
         "$mod CTRL, l, layoutmsg, colresize +conf"
 
-	# Focus panel columns
+        # Focus panel columns
         "ALT, Tab, layoutmsg, move +col"
         "ALT SHIFT, Tab, layoutmsg, move -col"
+
+        "ALT_SHIFT, comma, layoutmsg, swapcol l"
+        "ALT_SHIFT, period, layoutmsg, swapcol r"
+        "ALT_SHIFT, mouse_down, layoutmsg, swapcol l"
+        "ALT_SHIFT, mouse_up, layoutmsg, swapcol r"
       ];
 
       bind = [
