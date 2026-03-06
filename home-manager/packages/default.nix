@@ -1,6 +1,7 @@
 {
   imports = [
     ./brave.nix
+    ./brightnessctl.nix
     ./devenv.nix
     ./dolphin.nix
     ./ffmpeg.nix

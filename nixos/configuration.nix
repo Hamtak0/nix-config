@@ -103,13 +103,6 @@
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Select internationalisation properties. (move to ./locale.nix)
-  #i18n.defaultLocale = "en_US.UTF-8";
-  #i18n.extraLocales = [
-  #  "th_TH.UTF-8/UTF-8"
-  #  "ja_JP.UTF-8/UTF-8"
-  #];
-
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
@@ -125,14 +118,6 @@
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
-
-  # Enable sound.
-  # services.pulseaudio.enable = true;
-  # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
 
   # This setups a SSH server. Very important if you're setting up a headless system.
   # Feel free to remove if you don't need it.
@@ -188,19 +173,6 @@
   # and migrated your data accordingly.
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-
-  programs = {
-    foot.enable = true;
-    light.enable = true;
-    git.enable = true;
-    fish.enable = true;
-    tmux.enable = true;
-    direnv.enable = true;
-  };
-
-  environment.systemPackages = [
-    pkgs.brightnessctl
-  ];
 
   # enable Ozone Wayland support in Chromium and Electron based applications by setting the environment variable
   # https://nixos.wiki/wiki/Wayland
