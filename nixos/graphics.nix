@@ -37,9 +37,9 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable; # Same as production
+    # package = config.boot.kernelPackages.nvidiaPackages.stable; # Same as production
     # package = config.boot.kernelPackages.nvidiaPackages.production; # Latest production driver
-    # package = config.boot.kernelPackages.nvidiaPackages.beta;   # Latest beta driver
+    package = config.boot.kernelPackages.nvidiaPackages.beta;   # Latest beta driver
     # package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
     # package = config.boot.kernelPackages.nvidiaPackages.legacy_535; # Older versions
     # package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
@@ -48,10 +48,8 @@
   };
 
   hardware.nvidia.prime = {
-    offload = {
-      enable = true;
-      enableOffloadCmd = true;
-    };
+    sync.enable = true;
+
     amdgpuBusId = "PCI:6:0:0";
     nvidiaBusId = "PCI:1:0:0";
   };
