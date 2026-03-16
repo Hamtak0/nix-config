@@ -3,6 +3,7 @@
     ./battery-notifier.nix
     ./hypridle.nix
     ./mako.nix
+    ./playerctld.nix
     ./swww.nix
   ];
 }

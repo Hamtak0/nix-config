@@ -37,7 +37,7 @@
         }
         {
           timeout = 3600; # 2hours
-          on-timeout = "systemctl suspend"; # suspend pc
+          on-timeout = "playerctl status 2>/dev/null | grep -q 'Playing' || systemctl suspend"; # suspend pc if no music is playing in the background
         }
       ];
     };
