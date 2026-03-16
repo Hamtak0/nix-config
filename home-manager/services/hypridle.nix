@@ -16,27 +16,23 @@
 
       listener = [
         {
-          timeout = 90; # 1.5min.
+          timeout = 120; # 2min.
           on-timeout = "brightnessctl -s set 15"; # set monitor backlight to minimum, avoid 0 on OLED monitor.
           on-resume = "brightnessctl -r"; # monitor backlight restore.
         }
         {
           # turn off keyboard backlight, comment out this section if you dont have a keyboard backlight.
-          timeout = 90; # 1.5min.
+          timeout = 120; # 2min.
           on-timeout = "brightnessctl -sd asus::kbd_backlight set 0"; # turn off keyboard backlight.
           on-resume = "brightnessctl -rd asus::kbd_backlight"; # turn on keyboard backlight.
         }
         {
           timeout = 300; # 5min
-          on-timeout = "loginctl lock-session"; # lock screen when timeout has passed
-        }
-        {
-          timeout = 330; # 5.5min
-          on-timeout = "hyprctl dispatch dpms off"; # screen off when timeout has passed
+          on-timeout = "loginctl lock-session && hyprctl dispatch dpms off"; # lock screen and screen off when timeout has passed
           on-resume = "hyprctl dispatch dpms on && brightnessctl -r"; # screen on when activity is detected after timeout has fired.
         }
         {
-          timeout = 3600; # 2hours
+          timeout = 5400; # 2hours
           on-timeout = "playerctl status 2>/dev/null | grep -q 'Playing' || systemctl suspend"; # suspend pc if no music is playing in the background
         }
       ];
