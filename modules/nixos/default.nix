@@ -3,4 +3,5 @@
 {
   # List your module files here
   # my-module = import ./my-module.nix;
+  asus-battery-limit = import ./asus-battery-limit.nix;
 }
