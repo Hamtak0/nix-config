@@ -16,15 +16,10 @@
 
       listener = [
         {
+          # turn off keyboard backlight, delete out the section if you dont have a keyboard backlight.
           timeout = 120; # 2min.
-          on-timeout = "brightnessctl -s set 15"; # set monitor backlight to minimum, avoid 0 on OLED monitor.
-          on-resume = "brightnessctl -r"; # monitor backlight restore.
-        }
-        {
-          # turn off keyboard backlight, comment out this section if you dont have a keyboard backlight.
-          timeout = 120; # 2min.
-          on-timeout = "brightnessctl -sd asus::kbd_backlight set 0"; # turn off keyboard backlight.
-          on-resume = "brightnessctl -rd asus::kbd_backlight"; # turn on keyboard backlight.
+          on-timeout = "brightnessctl -s set 15 && brightnessctl -sd asus::kbd_backlight set 0"; # set monitor backlight to minimum, avoid 0 on OLED monitor and turn off keyboard backlight.
+          on-resume = "brightnessctl -r && brightnessctl -rd asus::kbd_backlight"; # monitor backlight restore and turn on keyboard backlight.
         }
         {
           timeout = 300; # 5min
