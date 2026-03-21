@@ -22,13 +22,17 @@
           on-resume = "brightnessctl -r && brightnessctl -rd asus::kbd_backlight"; # monitor backlight restore and turn on keyboard backlight.
         }
         {
-          timeout = 300; # 5min
-          on-timeout = "loginctl lock-session && hyprctl dispatch dpms off"; # lock screen and screen off when timeout has passed
+          timeout = 300; # 5min.
+          on-timeout = "loginctl lock-session && hyprctl dispatch dpms off"; # lock screen and screen off when timeout has passed.
           on-resume = "hyprctl dispatch dpms on && brightnessctl -r"; # screen on when activity is detected after timeout has fired.
         }
         {
-          timeout = 5400; # 2hours
-          on-timeout = "playerctl status 2>/dev/null | grep -q 'Playing' || systemctl suspend"; # suspend pc if no music is playing in the background
+          timeout = 2700; # 45min.
+          on-timeout = "playerctl status 2>/dev/null | grep -q 'Playing' || systemctl suspend"; # suspend pc if no music is playing in the background.
+        }
+        {
+          timeout = 7200; # 2hours.
+          on-timeout = "playerctl status 2>/dev/null | grep -q 'Playing' || systemctl poweroff"; # poweroff pc if no music is playing in the background.
         }
       ];
     };
