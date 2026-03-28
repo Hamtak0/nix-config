@@ -7,9 +7,6 @@
   };
 
   # Nvidia proprietary driver
-  # Load nvidia driver for Xorg and Wayland
-  services.xserver.videoDrivers = [ "nvidia" ];
-
   hardware.nvidia = {
     # Modesetting is required.
     modesetting.enable = true;
@@ -39,7 +36,7 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     # package = config.boot.kernelPackages.nvidiaPackages.stable; # Same as production
     # package = config.boot.kernelPackages.nvidiaPackages.production; # Latest production driver
-    package = config.boot.kernelPackages.nvidiaPackages.beta;   # Latest beta driver
+    package = config.boot.kernelPackages.nvidiaPackages.beta; # Latest beta driver
     # package = config.boot.kernelPackages.nvidiaPackages.vulkan_beta;
     # package = config.boot.kernelPackages.nvidiaPackages.legacy_535; # Older versions
     # package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
@@ -47,11 +44,18 @@
     # package = config.boot.kernelPackages.nvidiaPackages.legacy_340;
   };
 
-  hardware.nvidia.prime = {
-    sync.enable = true;
+  # Load Nvidia and AMD driver for Xorg and Wayland
+  services.xserver.videoDrivers = [
+    "amdgpu"
+    "nvidia"
+  ];
 
-    amdgpuBusId = "PCI:6:0:0";
-    nvidiaBusId = "PCI:1:0:0";
+  # For offloading, `modesetting` is needed additionally,
+  # otherwise the X-server will be running permanently on nvidia,
+  # thus keeping the GPU always on (see `nvidia-smi`).
+  hardware.nvidia.prime = {
+    amdgpuBusId = "PCI:6@0:0:0";
+    nvidiaBusId = "PCI:1@0:0:0";
   };
 
   # Backlight to AMD
