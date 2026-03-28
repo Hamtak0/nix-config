@@ -33,6 +33,11 @@
     # accessible via `nvidia-settings`.
     nvidiaSettings = true;
 
+    # Whether to enable dynamic Boost balances power between the CPU and the GPU for improved
+    # performance on supported laptops using the nvidia-powerd daemon. For more information,
+    # see the NVIDIA docs, on Chapter 23. Dynamic Boost on Linux.
+    dynamicBoost.enable = true;
+
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     # package = config.boot.kernelPackages.nvidiaPackages.stable; # Same as production
     # package = config.boot.kernelPackages.nvidiaPackages.production; # Latest production driver
@@ -54,6 +59,11 @@
   # otherwise the X-server will be running permanently on nvidia,
   # thus keeping the GPU always on (see `nvidia-smi`).
   hardware.nvidia.prime = {
+    offload = {
+      enable = true;
+      enableOffloadCmd = true;
+    };
+
     amdgpuBusId = "PCI:6@0:0:0";
     nvidiaBusId = "PCI:1@0:0:0";
   };
