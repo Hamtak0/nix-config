@@ -14,5 +14,6 @@
     ./steam.nix
     ./typst.nix
     ./wireshark.nix
+    ./xournalpp.nix
   ];
 }
