@@ -1,3 +1,5 @@
+# --- This Project is no longer needed as asusd can handle these problems ---
+#
 # A NixOS module to send notifications for low and critical battery levels.
 #
 # To use, import this file into your `configuration.nix` and enable the service:
