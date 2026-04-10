@@ -97,7 +97,8 @@
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
   # Set your time zone.
-  time.timeZone = "Asia/Bangkok";
+  # time.timeZone = "Asia/Bangkok";
+  time.timeZone = "Asia/Tokyo";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
