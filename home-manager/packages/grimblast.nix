@@ -1,4 +1,4 @@
-{ pkgs, ... }:
-{
-  home.packages = [ pkgs.grimblast ];
-}
+# { pkgs, ... }:
+# {
+#   home.packages = [ pkgs.grimblast ];
+# }

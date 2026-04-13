@@ -8,6 +8,7 @@
     ./git.nix
     ./hyprland
     ./hyprlock.nix
+    ./hyprshot.nix
     ./mpv.nix
     ./nh.nix
     ./nix-index-database.nix

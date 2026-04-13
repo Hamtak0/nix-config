@@ -157,9 +157,9 @@
         "$mod, Return, exec, uwsm-app -- $term"
 
         # Screenshot fn+f6
-        "$mod Shift_L, s, exec, uwsm-app -- grimblast --notify copysave area"
-        " , Print, exec, uwsm-app -- grimblast --notify copysave screen"
-        "$mod, Print, exec, uwsm-app -- grimblast --notify copysave active"
+        "$mod Shift_L, s, exec, uwsm-app -- hyprshot -m region --notify copysave area"
+        " , Print, exec, uwsm-app -- hyprshot -m output --notify copysave screen"
+        "$mod, Print, exec, uwsm-app -- hyprshot -m window --notify copysave active"
 
         # # Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
         # bind = $mod, Return, exec, $terminal
