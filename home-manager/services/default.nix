@@ -4,6 +4,6 @@
     ./hypridle.nix
     ./mako.nix
     ./playerctld.nix
-    ./swww.nix
+    ./awww.nix
   ];
 }
