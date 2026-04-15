@@ -5,6 +5,7 @@
     ./devenv.nix
     ./dolphin.nix
     ./ffmpeg.nix
+    ./freerdp.nix
     # ./grimblast.nix
     ./imagemagick.nix
     ./libreoffice.nix
