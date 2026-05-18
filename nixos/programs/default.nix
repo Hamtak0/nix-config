@@ -6,6 +6,7 @@
     ./git.nix
     ./hyprland.nix
     ./neovim.nix
+    ./nix-ld.nix
     ./tmux.nix
     ./traceroute.nix
     ./virt-manager.nix
