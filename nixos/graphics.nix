@@ -15,7 +15,7 @@
     # Enable this if you have graphical corruption issues or application crashes after waking
     # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
     # of just the bare essentials.
-    powerManagement.enable = false;
+    powerManagement.enable = true;
 
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
@@ -27,7 +27,7 @@
     # supported GPUs is at:
     # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
     # Only available from driver 515.43.04+
-    open = true;
+    open = false;
 
     # Enable the Nvidia settings menu,
     # accessible via `nvidia-settings`.
@@ -59,15 +59,26 @@
   # otherwise the X-server will be running permanently on nvidia,
   # thus keeping the GPU always on (see `nvidia-smi`).
   hardware.nvidia.prime = {
-    offload = {
-      enable = true;
-      enableOffloadCmd = true;
-    };
+    reverseSync.enable = true;
+    # offload = {
+    #   enable = true;
+    #   enableOffloadCmd = true;
+    # };
 
     amdgpuBusId = "PCI:6@0:0:0";
     nvidiaBusId = "PCI:1@0:0:0";
   };
 
-  # Backlight to AMD
-  boot.kernelParams = [ "acpi_backlight=native" ];
+  boot.kernelParams = [
+    "acpi_backlight=native" # Backlight to AMD
+    "acpi_osi=Linux"
+    # "nvidia-drm.modeset=1"
+    "nvidia.NVreg_TemporaryFilePath=/var/tmp"
+  ];
+
+  # systemd.services.systemd-suspend.environment.SYSTEMD_SLEEP_FREEZE_USER_SESSIONS = "false";
+
+  # boot.extraModprobeConfig = ''
+  #   options nvidia NVreg_UsePageAttributeTable=1
+  # '';
 }

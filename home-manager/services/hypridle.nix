@@ -26,10 +26,11 @@
           on-timeout = "loginctl lock-session && hyprctl dispatch dpms off"; # lock screen and screen off when timeout has passed.
           on-resume = "hyprctl dispatch dpms on && brightnessctl -r"; # screen on when activity is detected after timeout has fired.
         }
-        {
-          timeout = 2700; # 45min.
-          on-timeout = "playerctl status 2>/dev/null | grep -q 'Playing' || systemctl suspend"; # suspend pc if no music is playing in the background.
-        }
+        # TODO: The "systemctl suspend" is buggy (black screen while the keyboard and fan is working)
+        # {
+        #   timeout = 2700; # 45min.
+        #   on-timeout = "playerctl status 2>/dev/null | grep -q 'Playing' || systemctl suspend"; # suspend pc if no music is playing in the background.
+        # }
         {
           timeout = 7200; # 2hours.
           on-timeout = "playerctl status 2>/dev/null | grep -q 'Playing' || systemctl poweroff"; # poweroff pc if no music is playing in the background.
