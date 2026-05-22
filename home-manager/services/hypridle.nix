@@ -17,7 +17,7 @@
       listener = [
         {
           # turn off keyboard backlight, delete out the section if you dont have a keyboard backlight.
-          timeout = 120; # 2min.
+          timeout = 180; # 3min.
           on-timeout = "brightnessctl -s set 15 && brightnessctl -sd asus::kbd_backlight set 0"; # set monitor backlight to minimum, avoid 0 on OLED monitor and turn off keyboard backlight.
           on-resume = "brightnessctl -r && brightnessctl -rd asus::kbd_backlight"; # monitor backlight restore and turn on keyboard backlight.
         }
@@ -26,11 +26,11 @@
           on-timeout = "loginctl lock-session && hyprctl dispatch dpms off"; # lock screen and screen off when timeout has passed.
           on-resume = "hyprctl dispatch dpms on && brightnessctl -r"; # screen on when activity is detected after timeout has fired.
         }
-        # TODO: The "systemctl suspend" is buggy (black screen while the keyboard and fan is working)
-        # {
-        #   timeout = 2700; # 45min.
-        #   on-timeout = "playerctl status 2>/dev/null | grep -q 'Playing' || systemctl suspend"; # suspend pc if no music is playing in the background.
-        # }
+        # The "systemctl suspend" is buggy (black screen while the keyboard and fan is working), if the supergfx didn't set to Hybrid.
+        {
+          timeout = 3600; # 1hour.
+          on-timeout = "playerctl status 2>/dev/null | grep -q 'Playing' || systemctl suspend"; # suspend pc if no music is playing in the background.
+        }
         {
           timeout = 7200; # 2hours.
           on-timeout = "playerctl status 2>/dev/null | grep -q 'Playing' || systemctl poweroff"; # poweroff pc if no music is playing in the background.
