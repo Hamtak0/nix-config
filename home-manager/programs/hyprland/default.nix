@@ -19,8 +19,7 @@
     systemd.enable = false;
     settings = {
       monitor = [
-        # "desc:Chimei Innolux Corporation 0x1521, preferred, auto, 1"
-        "eDP-1, preferred, 0x0, 1"
+        "desc:Chimei Innolux Corporation 0x1521, preferred, 0x0, 1"
         ", preferred, auto, 1"
       ];
 
