@@ -18,6 +18,7 @@
         "input"
         "networkmanager"
         "libvirtd"
+        "librepods"
       ];
       shell = pkgs.fish;
     };
