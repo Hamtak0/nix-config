@@ -59,7 +59,7 @@
   # otherwise the X-server will be running permanently on nvidia,
   # thus keeping the GPU always on (see `nvidia-smi`).
   hardware.nvidia.prime = {
-    reverseSync.enable = true;
+    sync.enable = true;
     # offload = {
     #   enable = true;
     #   enableOffloadCmd = true;
