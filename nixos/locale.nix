@@ -3,6 +3,7 @@
   # Mandatory
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocales = [
+    "en_US.UTF-8/UTF-8"
     "th_TH.UTF-8/UTF-8"
     "ja_JP.UTF-8/UTF-8"
   ];
