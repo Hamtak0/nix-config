@@ -32,6 +32,7 @@
     ./services
     ./sound.nix
     ./steam.nix
+    ./time.nix
     ./users.nix
 
     inputs.home-manager.nixosModules.home-manager
@@ -96,9 +97,6 @@
   networking.hostName = "hamham"; # Define your hostname.
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
-  # Set your time zone.
-  # time.timeZone = "Asia/Bangkok";
-  time.timeZone = "Asia/Tokyo";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
