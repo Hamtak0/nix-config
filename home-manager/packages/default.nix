@@ -9,6 +9,7 @@
     ./imagemagick.nix
     ./libreoffice.nix
     ./nixfmt.nix
+    ./ocaml.nix
     ./packettracer.nix
     ./pavucontrol.nix
     ./slack.nix
