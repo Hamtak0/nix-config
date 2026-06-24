@@ -17,6 +17,7 @@
     # ./nixvim.nix
     ./ripgrep.nix
     ./rofi.nix
+    ./vscode.nix
     ./yazi.nix
     ./zathura.nix
     ./zed.nix
