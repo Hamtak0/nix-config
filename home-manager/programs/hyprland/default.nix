@@ -116,6 +116,12 @@
       # See https://wiki.hypr.land/Configuring/Window-Rules/ for more
       # See https://wiki.hypr.land/Configuring/Workspace-Rules/ for workspace rules
 
+      gesture = [
+        # finger, direction, action
+        "3, left, dispatcher, layoutmsg, move +col"
+        "3, right, dispatcher, layoutmsg, move -col"
+      ];
+
       windowrule = [
         # Ignore maximize requests from apps. You'll probably like this.
         "suppress_event maximize, match:class .*"
