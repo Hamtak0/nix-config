@@ -2,6 +2,7 @@
   imports = [
     ./aider-chat.nix
     ./anki.nix
+    ./antigravity.nix
     ./discord.nix
     ./eza.nix
     ./fastfetch.nix
