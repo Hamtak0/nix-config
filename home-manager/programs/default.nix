@@ -19,6 +19,7 @@
     ./ripgrep.nix
     ./rofi.nix
     ./vscode.nix
+    ./waybar.nix
     ./yazi.nix
     ./zathura.nix
     ./zed.nix
