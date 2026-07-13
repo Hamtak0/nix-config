@@ -22,14 +22,16 @@
     # ./users.nix
 
     # Import your generated (nixos-generate-config) hardware configuration
+    ./packages
+    ./programs
+    ./services
+
     ./bluetooth.nix
     ./graphics.nix
     ./greeter.nix
     ./hardware-configuration.nix
     ./locale.nix
-    ./packages
-    ./programs
-    ./services
+    ./pam.nix
     ./sound.nix
     ./steam.nix
     ./time.nix
