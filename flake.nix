@@ -30,8 +30,6 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    hermes-agent.url = "github:NousResearch/hermes-agent";
   };
 
   outputs =
@@ -39,8 +37,6 @@
       self,
       nixpkgs,
       home-manager,
-      nix-index-database,
-      hermes-agent,
       ...
     }@inputs:
     let
