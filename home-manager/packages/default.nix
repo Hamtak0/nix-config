@@ -17,5 +17,6 @@
     ./typst.nix
     ./wireshark.nix
     ./xournalpp.nix
+    ./zen-browser.nix
   ];
 }
