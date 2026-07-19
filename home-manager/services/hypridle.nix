@@ -24,11 +24,12 @@
         {
           timeout = 300; # 5minutes.
           on-timeout = "loginctl lock-session"; # lock screen
+          on-resume = "brightnessctl -r && brightnessctl -rd asus::kbd_backlight"; # monitor backlight restore and turn on keyboard backlight.
         }
         {
           timeout = 330; # 5.5minutes.
           on-timeout = "hyprctl dispatch dpms off"; # screen off when timeout has passed.
-          on-resume = "hyprctl dispatch dpms on && brightnessctl -r"; # screen on when activity is detected after timeout has fired.
+          on-resume = "hyprctl dispatch dpms on && brightnessctl -r && brightnessctl -rd asus::kbd_backlight"; # screen on when activity is detected after timeout has fired.
         }
         # The "systemctl suspend" is buggy (black screen while the keyboard and fan is working), if the supergfx didn't set to Hybrid.
         {
