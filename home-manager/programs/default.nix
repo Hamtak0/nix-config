@@ -1,6 +1,6 @@
 {
   imports = [
-    ./aider-chat.nix
+    # ./aider-chat.nix
     ./anki.nix
     ./antigravity.nix
     ./discord.nix

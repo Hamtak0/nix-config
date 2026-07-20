@@ -1,3 +1,3 @@
-{
-  programs.aider-chat.enable = true;
-}
+# {
+#   programs.aider-chat.enable = true;
+# }
