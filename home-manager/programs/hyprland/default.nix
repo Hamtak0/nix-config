@@ -21,6 +21,7 @@
     settings = {
       monitor = [
         "desc:Chimei Innolux Corporation 0x1521, preferred, 0x0, 1"
+        "HDMI-A-1, highres, auto, 1, mirror, desc:Chimei Innolux Corporation 0x1521"
         ", preferred, auto, 1"
       ];
 
