@@ -13,7 +13,6 @@
     ./packettracer.nix
     ./pavucontrol.nix
     ./slack.nix
-    ./steam.nix
     ./typst.nix
     ./wireshark.nix
     ./xournalpp.nix
