@@ -10,6 +10,7 @@
     ./libreoffice.nix
     ./nixfmt.nix
     ./ocaml.nix
+    ./okular.nix
     ./packettracer.nix
     ./pavucontrol.nix
     ./slack.nix
