@@ -14,6 +14,7 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+    # There is a problem when change configType to lua is that the binding is not compatible.
     configType = "hyprlang";
     package = null;
     portalPackage = null;
