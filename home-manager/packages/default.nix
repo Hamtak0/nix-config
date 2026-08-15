@@ -8,6 +8,7 @@
     ./freerdp.nix
     ./imagemagick.nix
     ./libreoffice.nix
+    ./nixd.nix
     ./nixfmt.nix
     ./ocaml.nix
     ./okular.nix
