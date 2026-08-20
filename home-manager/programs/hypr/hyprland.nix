@@ -1,6 +1,5 @@
 {
-  inputs,
-  pkgs,
+  config,
   ...
 }:
 {
@@ -241,6 +240,10 @@
       # bindl = , XF86AudioPause, exec, playerctl play-pause
       # bindl = , XF86AudioPlay, exec, playerctl play-pause
       # bindl = , XF86AudioPrev, exec, playerctl previous
+
+      source = [
+        "${config.home.homeDirectory}/.config/hypr/local.conf"
+      ];
     };
 
     # exec-once = [];

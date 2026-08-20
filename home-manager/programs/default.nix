@@ -8,9 +8,7 @@
     ./fastfetch.nix
     ./fish.nix
     ./git.nix
-    ./hyprland
-    ./hyprlock.nix
-    ./hyprshot.nix
+    ./hypr
     ./mpv.nix
     ./nh.nix
     ./nix-index-database.nix
