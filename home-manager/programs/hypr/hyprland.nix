@@ -121,6 +121,9 @@
         # finger, direction, action
         "3, left, dispatcher, layoutmsg, move +col"
         "3, right, dispatcher, layoutmsg, move -col"
+
+        "4, up, dispatcher, workspace, +1"
+        "4, down, dispatcher, workspace, -1"
       ];
 
       windowrule = [
