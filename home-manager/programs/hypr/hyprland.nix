@@ -120,70 +120,71 @@ in
       };
 
       animation = [
+        # leaf, enabled, speed, bezier/spring, style
         {
           leaf = "windowsIn";
           enabled = 1;
           speed = 3;
-          spring = "default";
+          bezier = "default";
           style = "popin 50%";
         }
         {
           leaf = "windowsOut";
           enabled = 1;
           speed = 4;
-          spring = "default";
+          bezier = "default";
           style = "popin 75%";
         }
         {
           leaf = "windowsMove";
           enabled = 1;
           speed = 3;
-          spring = "default";
+          bezier = "default";
         }
         {
           leaf = "border";
           enabled = 1;
           speed = 10;
-          spring = "default";
+          bezier = "default";
         }
         {
           leaf = "borderangle";
           enabled = 1;
           speed = 7.5;
-          spring = "default";
+          bezier = "default";
         }
         {
           leaf = "fade";
           enabled = 1;
           speed = 7;
-          spring = "default";
+          bezier = "default";
         }
         {
           leaf = "workspaces";
           enabled = 1;
           speed = 3;
-          spring = "default";
+          bezier = "default";
           style = "slidefadevert 10%";
         }
         {
           leaf = "specialWorkspace";
           enabled = 1;
           speed = 4;
-          spring = "default";
+          bezier = "default";
           style = "slidefadevert 5%";
         }
         {
           leaf = "layers";
           enabled = 1;
           speed = 2.5;
-          spring = "default";
+          bezier = "default";
           style = "fade";
         }
         {
           leaf = "fadeLayers";
           enabled = 1;
           speed = 2.5;
-          spring = "default";
+          bezier = "default";
         }
       ];
 
