@@ -17,7 +17,7 @@ let
     focus = dir: lua ''hl.dsp.focus({ direction = "${dir}" })'';
     swap = dir: lua ''hl.dsp.window.swap({ direction = "${dir}" })'';
     focusWorkspace = ws: lua ''hl.dsp.focus({ workspace = "${toString ws}" })'';
-    moveWorkspace = ws: lua ''hl.dsp.window.move({ workspace = "${toString ws}" })'';
+    moveToWorkspace = ws: lua ''hl.dsp.window.move({ workspace = "${toString ws}" })'';
     sendShortcut = cont: key: lua ''hl.dsp.send_shortcut({ mods = "${cont}", key = "${key}" })'';
   };
 
@@ -191,30 +191,37 @@ in
       # See https://wiki.hypr.land/Configuring/Window-Rules/ for more
       # See https://wiki.hypr.land/Configuring/Workspace-Rules/ for workspace rules
 
-      gesture = [
-        # finger, direction, action
-        {
-          fingers = 3;
-          direction = "l";
-          action = (dsp.layout "move +col");
-        }
-        {
-          fingers = 3;
-          direction = "r";
-          action = (dsp.layout "move -col");
-        }
-
-        {
-          fingers = 4;
-          direction = "u";
-          action = (dsp.focusWorkspace "e+1");
-        }
-        {
-          fingers = 4;
-          direction = "d";
-          action = (dsp.focusWorkspace "e-1");
-        }
-      ];
+      gesture =
+        # let
+        #   dspFn = {
+        #     layout = msg: lua ''function() hl.dsp.layout("${msg}") end'';
+        #     focusWorkspace = ws: lua ''function() hl.dsp.focus({ workspace = "${toString ws}"}) end'';
+        #   };
+        # in
+        [
+          # finger, direction, action
+          #! It cannot accept the action function somehow
+          # {
+          #   fingers = 3;
+          #   direction = "right";
+          #   action = dspFn.layout "move -col";
+          # }
+          # {
+          #   fingers = 3;
+          #   direction = "left";
+          #   action = dspFn.layout "move +col";
+          # }
+          {
+            fingers = 3;
+            direction = "horizontal";
+            action = "scroll_move";
+          }
+          {
+            fingers = 4;
+            direction = "vertical";
+            action = "workspace";
+          }
+        ];
 
       window_rule = [
         # Ignore maximize requests from apps. You'll probably like this.
@@ -250,8 +257,8 @@ in
 
         # Screenshot (fn+f6, PrintScreen)
         (bind "${mod} + SHIFT + S" (dsp.exec "uwsm-app -- hyprshot -m region --notify copysave area"))
-        (bind ", Print" (dsp.exec "uwsm-app -- hyprshot -m output --notify copysave screen"))
-        (bind "${mod} + Print" (dsp.exec "uwsm-app -- hyprshot -m window --notify copysave active"))
+        (bind "PRINT" (dsp.exec "uwsm-app -- hyprshot -m output --notify copysave screen"))
+        (bind "${mod} + PRINT" (dsp.exec "uwsm-app -- hyprshot -m window --notify copysave active"))
 
         # Universal copy/paste
         (bind "${mod} + C" (dsp.sendShortcut "CTRL" "Insert"))
@@ -323,31 +330,19 @@ in
           locked = true;
           repeating = true;
         })
-      ];
-
-      # # Switch workspaces with mod + [0-9]
-      # "${mod}, 1, workspace, 1"
-      # "${mod}, 2, workspace, 2"
-      # "${mod}, 3, workspace, 3"
-      # "${mod}, 4, workspace, 4"
-      # "${mod}, 5, workspace, 5"
-      # "${mod}, 6, workspace, 6"
-      # "${mod}, 7, workspace, 7"
-      # "${mod}, 8, workspace, 8"
-      # "${mod}, 9, workspace, 9"
-      # "${mod}, 0, workspace, 10"
-
-      # # Move active window to a workspace with mod + SHIFT + [0-9]
-      # "${mod} SHIFT, 1, movetoworkspace, 1"
-      # "${mod} SHIFT, 2, movetoworkspace, 2"
-      # "${mod} SHIFT, 3, movetoworkspace, 3"
-      # "${mod} SHIFT, 4, movetoworkspace, 4"
-      # "${mod} SHIFT, 5, movetoworkspace, 5"
-      # "${mod} SHIFT, 6, movetoworkspace, 6"
-      # "${mod} SHIFT, 7, movetoworkspace, 7"
-      # "${mod} SHIFT, 8, movetoworkspace, 8"
-      # "${mod} SHIFT, 9, movetoworkspace, 9"
-      # "${mod} SHIFT, 0, movetoworkspace, 10"
+      ]
+      ++ lib.concatMap (
+        ws:
+        let
+          key = toString (lib.mod ws 10);
+        in
+        [
+          # Switch workspace with mod + [0-9]
+          (bind "${mod} + ${key}" (dsp.focusWorkspace ws))
+          # Move active window to a workspace with mod + SHIFT + [0-9]
+          (bind "${mod} + SHIFT + ${key}" (dsp.moveToWorkspace ws))
+        ]
+      ) (lib.range 1 10);
 
       # Scroll through existing workspaces with mod + scroll
       # "$mod, mouse_down, workspace, e+1"
@@ -358,12 +353,11 @@ in
       # bindl = , XF86AudioPause, exec, playerctl play-pause
       # bindl = , XF86AudioPlay, exec, playerctl play-pause
       # bindl = , XF86AudioPrev, exec, playerctl previous
-
-      # source = [
-      #   "${config.home.homeDirectory}/.config/hypr/local.lua"
-      # ];
     };
 
+    extraConfig = ''
+      pcall(require, "local")
+    '';
     # exec-once = [];
   };
 }
