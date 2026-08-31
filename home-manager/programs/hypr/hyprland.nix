@@ -1,10 +1,37 @@
 {
   config,
+  lib,
   ...
 }:
 let
   mod = "SUPER";
-  terminal = "foot";
+  term = "foot";
+
+  lua = lib.generators.mkLuaInline;
+
+  dsp = {
+    exec = cmd: lua ''hl.dsp.exec_cmd("${cmd}")'';
+    close = lua "hl.dsp.window.close()";
+    exit = lua "hl.dsp.exit()";
+    layout = msg: lua ''hl.dsp.layout("${msg}")'';
+    focus = dir: lua ''hl.dsp.focus({ direction = "${dir}" })'';
+    swap = dir: lua ''hl.dsp.window.swap({ direction = "${dir}" })'';
+  };
+
+  bind = keys: dispatcher: {
+    _args = [
+      keys
+      dispatcher
+    ];
+  };
+  bindOpts = keys: dispatcher: opts: {
+    _args = [
+      keys
+      dispatcher
+      opts
+    ];
+  };
+
 in
 {
   nix.settings = {
@@ -23,9 +50,24 @@ in
     systemd.enable = false;
     settings = {
       monitor = [
-        "desc:Chimei Innolux Corporation 0x1521, preferred, 0x0, 1"
-        "HDMI-A-1, highres, auto, 1"
-        ", preferred, auto, 1"
+        {
+          output = "desc:Chimei Innolux Corporation 0x1521";
+          mode = "preferred";
+          position = "0x0";
+          scale = "1";
+        }
+        {
+          output = "HDMI-A-1";
+          mode = "highres";
+          position = "auto";
+          scale = "1";
+        }
+        {
+          output = "";
+          mode = "preferred";
+          position = "auto";
+          scale = "1";
+        }
       ];
 
       input = {
@@ -73,49 +115,73 @@ in
         disable_splash_rendering = true;
       };
 
-      animations = {
-        enabled = true;
-        animation = [
-          "windowsIn, 1, 3, default, popin 50%"
-          "windowsOut, 1, 4, default, popin 75%"
-          "windowsMove, 1, 3, default"
-          "border, 1, 10, default"
-          "borderangle, 1, 7.5, default"
-          "fade, 1, 7, default"
-          "workspaces, 1, 3, default, slidefadevert 10%"
-          "specialWorkspace, 1, 4, default, slidefadevert 5%"
-          "layers, 1, 2.5, default, fade"
-          "fadeLayers, 1, 2.5, default"
-        ];
-      };
-
-      # animations {
-      #     enabled = true # please :)
-      #     # Default animations, see https://wiki.hypr.land/Configuring/Animations/ for more
-      #
-      #     bezier = easeOutQuint,0.23,1,0.32,1
-      #     bezier = easeInOutCubic,0.65,0.05,0.36,1
-      #     bezier = linear,0,0,1,1
-      #     bezier = almostLinear,0.5,0.5,0.75,1.0
-      #     bezier = quick,0.15,0,0.1,1
-      #
-      #     animation = global, 1, 10, default
-      #     animation = border, 1, 5.39, easeOutQuint
-      #     animation = windows, 1, 4.79, easeOutQuint
-      #     animation = windowsIn, 1, 4.1, easeOutQuint, popin 87%
-      #     animation = windowsOut, 1, 1.49, linear, popin 87%
-      #     animation = fadeIn, 1, 1.73, almostLinear
-      #     animation = fadeOut, 1, 1.46, almostLinear
-      #     animation = fade, 1, 3.03, quick
-      #     animation = layers, 1, 3.81, easeOutQuint
-      #     animation = layersIn, 1, 4, easeOutQuint, fade
-      #     animation = layersOut, 1, 1.5, linear, fade
-      #     animation = fadeLayersIn, 1, 1.79, almostLinear
-      #     animation = fadeLayersOut, 1, 1.39, almostLinear
-      #     animation = workspaces, 1, 1.94, almostLinear, fade
-      #     animation = workspacesIn, 1, 1.21, almostLinear, fade
-      #     animation = workspacesOut, 1, 1.94, almostLinear, fade
-      # }
+      animation = [
+        {
+          leaf = "windowsIn";
+          enabled = 1;
+          speed = 3;
+          spring = "default";
+          style = "popin 50%";
+        }
+        {
+          leaf = "windowsOut";
+          enabled = 1;
+          speed = 4;
+          spring = "default";
+          style = "popin 75%";
+        }
+        {
+          leaf = "windowsMove";
+          enabled = 1;
+          speed = 3;
+          spring = "default";
+        }
+        {
+          leaf = "border";
+          enabled = 1;
+          speed = 10;
+          spring = "default";
+        }
+        {
+          leaf = "borderangle";
+          enabled = 1;
+          speed = 7.5;
+          spring = "default";
+        }
+        {
+          leaf = "fade";
+          enabled = 1;
+          speed = 7;
+          spring = "default";
+        }
+        {
+          leaf = "workspaces";
+          enabled = 1;
+          speed = 3;
+          spring = "default";
+          style = "slidefadevert 10%";
+        }
+        {
+          leaf = "specialWorkspace";
+          enabled = 1;
+          speed = 4;
+          spring = "default";
+          style = "slidefadevert 5%";
+        }
+        {
+          leaf = "layers";
+          enabled = 1;
+          speed = 2.5;
+          spring = "default";
+          style = "fade";
+        }
+        {
+          leaf = "fadeLayers";
+          enabled = 1;
+          speed = 2.5;
+          spring = "default";
+        }
+      ];
 
       # See https://wiki.hypr.land/Configuring/Window-Rules/ for more
       # See https://wiki.hypr.land/Configuring/Workspace-Rules/ for workspace rules
@@ -129,15 +195,27 @@ in
         "4, down, dispatcher, workspace, -1"
       ];
 
-      windowrule = [
+      window_rule = [
         # Ignore maximize requests from apps. You'll probably like this.
-        "suppress_event maximize, match:class .*"
+        {
+          match = {
+            class = ".*";
+          };
+          suppress_event = "maximize";
+        }
 
         # Fix some dragging issues with XWayland
-        "no_focus on, match:class ^$,match:title ^$,match:xwayland 1,match:float 1,match:fullscreen 0,match:pin 0"
-
-        # "float on, match:class ^(brave-browser|org.pulseaudio.pavucontrol)$"
-        "tile on, match:class ^(brave-browser)$"
+        {
+          match = {
+            class = "^$";
+            title = "^$";
+            xwayland = true;
+            float = true;
+            fullscreen = false;
+            pin = false;
+          };
+          no_focus = true;
+        }
       ];
 
       binde = [
@@ -161,7 +239,7 @@ in
         "${mod}, r, exec, uwsm-app -- rofi -show drun -show-icons"
         "${mod}, a, exec, uwsm-app -- rofi -show run -show-icons"
         "${mod}, l, exec, uwsm-app -- hyprlock"
-        "${mod}, Return, exec, uwsm-app -- ${terminal}"
+        "${mod}, Return, exec, uwsm-app -- ${term}"
 
         # Screenshot fn+f6
         "${mod} Shift_L, s, exec, uwsm-app -- hyprshot -m region --notify copysave area"
