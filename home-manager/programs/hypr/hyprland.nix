@@ -1,7 +1,40 @@
 {
-  config,
+  lib,
   ...
 }:
+let
+  mod = "SUPER";
+  term = "foot";
+
+  lua = lib.generators.mkLuaInline;
+
+  dsp = {
+    exec = cmd: lua ''hl.dsp.exec_cmd("${cmd}")'';
+    close = lua "hl.dsp.window.close()";
+    exit = lua "hl.dsp.exit()";
+    layout = msg: lua ''hl.dsp.layout("${msg}")'';
+    focus = dir: lua ''hl.dsp.focus({ direction = "${dir}" })'';
+    swap = dir: lua ''hl.dsp.window.swap({ direction = "${dir}" })'';
+    focusWorkspace = ws: lua ''hl.dsp.focus({ workspace = "${toString ws}" })'';
+    moveToWorkspace = ws: lua ''hl.dsp.window.move({ workspace = "${toString ws}" })'';
+    sendShortcut = cont: key: lua ''hl.dsp.send_shortcut({ mods = "${cont}", key = "${key}" })'';
+  };
+
+  bind = keys: dispatcher: {
+    _args = [
+      keys
+      dispatcher
+    ];
+  };
+  bindOpts = keys: dispatcher: opts: {
+    _args = [
+      keys
+      dispatcher
+      opts
+    ];
+  };
+
+in
 {
   nix.settings = {
     extra-substituters = [ "https://hyprland.cachix.org" ];
@@ -13,163 +46,224 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    # There is a problem when change configType to lua is that the binding is not compatible.
-    configType = "hyprlang";
+    configType = "lua";
     package = null;
     portalPackage = null;
     systemd.enable = false;
     settings = {
       monitor = [
-        "desc:Chimei Innolux Corporation 0x1521, preferred, 0x0, 1"
-        "HDMI-A-1, highres, auto, 1"
-        ", preferred, auto, 1"
+        {
+          output = "desc:Chimei Innolux Corporation 0x1521";
+          mode = "preferred";
+          position = "0x0";
+          scale = "1";
+        }
+        {
+          output = "HDMI-A-1";
+          mode = "highres";
+          position = "auto";
+          scale = "1";
+        }
+        {
+          output = "";
+          mode = "preferred";
+          position = "auto";
+          scale = "1";
+        }
       ];
 
-      input = {
-        kb_layout = "us"; # th, jp
-        # kb_options = "grp:win_space_toggle";
-        numlock_by_default = true;
-        repeat_rate = 40;
-        repeat_delay = 275;
-        follow_mouse = 1;
-        sensitivity = 0;
-        accel_profile = "flat";
-        touchpad.natural_scroll = true;
-      };
-
-      general = {
-        gaps_in = 1;
-        gaps_out = 0;
-        border_size = 0;
-        layout = "scrolling";
-        allow_tearing = true;
-      };
-
-      scrolling = {
-        fullscreen_on_one_column = false;
-        column_width = 1;
-        focus_fit_method = 1;
-      };
-
-      decoration = {
-        rounding = 8;
-        active_opacity = 1.0;
-        inactive_opacity = 0.96;
-        blur = {
-          enabled = true;
-          size = 2;
-          passes = 2;
-          special = false;
+      config = {
+        input = {
+          kb_layout = "us"; # th, jp
+          # kb_options = "grp:win_space_toggle";
+          numlock_by_default = true;
+          repeat_rate = 40;
+          repeat_delay = 275;
+          follow_mouse = 1;
+          sensitivity = 0;
+          accel_profile = "flat";
+          touchpad.natural_scroll = true;
         };
-        shadow.enabled = false;
-        dim_special = 0.5;
+
+        general = {
+          gaps_in = 1;
+          gaps_out = 0;
+          border_size = 0;
+          layout = "scrolling";
+          allow_tearing = true;
+        };
+
+        scrolling = {
+          fullscreen_on_one_column = false;
+          column_width = 1;
+          focus_fit_method = 1;
+        };
+
+        decoration = {
+          rounding = 8;
+          active_opacity = 1.0;
+          inactive_opacity = 0.96;
+          blur = {
+            enabled = true;
+            size = 2;
+            passes = 2;
+            special = false;
+          };
+          shadow.enabled = false;
+          dim_special = 0.5;
+        };
+
+        misc = {
+          disable_hyprland_logo = true;
+          disable_splash_rendering = true;
+        };
       };
 
-      misc = {
-        disable_hyprland_logo = true;
-        disable_splash_rendering = true;
-      };
-
-      animations = {
-        enabled = true;
-        animation = [
-          "windowsIn, 1, 3, default, popin 50%"
-          "windowsOut, 1, 4, default, popin 75%"
-          "windowsMove, 1, 3, default"
-          "border, 1, 10, default"
-          "borderangle, 1, 7.5, default"
-          "fade, 1, 7, default"
-          "workspaces, 1, 3, default, slidefadevert 10%"
-          "specialWorkspace, 1, 4, default, slidefadevert 5%"
-          "layers, 1, 2.5, default, fade"
-          "fadeLayers, 1, 2.5, default"
-        ];
-      };
-
-      # animations {
-      #     enabled = true # please :)
-      #     # Default animations, see https://wiki.hypr.land/Configuring/Animations/ for more
-      #
-      #     bezier = easeOutQuint,0.23,1,0.32,1
-      #     bezier = easeInOutCubic,0.65,0.05,0.36,1
-      #     bezier = linear,0,0,1,1
-      #     bezier = almostLinear,0.5,0.5,0.75,1.0
-      #     bezier = quick,0.15,0,0.1,1
-      #
-      #     animation = global, 1, 10, default
-      #     animation = border, 1, 5.39, easeOutQuint
-      #     animation = windows, 1, 4.79, easeOutQuint
-      #     animation = windowsIn, 1, 4.1, easeOutQuint, popin 87%
-      #     animation = windowsOut, 1, 1.49, linear, popin 87%
-      #     animation = fadeIn, 1, 1.73, almostLinear
-      #     animation = fadeOut, 1, 1.46, almostLinear
-      #     animation = fade, 1, 3.03, quick
-      #     animation = layers, 1, 3.81, easeOutQuint
-      #     animation = layersIn, 1, 4, easeOutQuint, fade
-      #     animation = layersOut, 1, 1.5, linear, fade
-      #     animation = fadeLayersIn, 1, 1.79, almostLinear
-      #     animation = fadeLayersOut, 1, 1.39, almostLinear
-      #     animation = workspaces, 1, 1.94, almostLinear, fade
-      #     animation = workspacesIn, 1, 1.21, almostLinear, fade
-      #     animation = workspacesOut, 1, 1.94, almostLinear, fade
-      # }
+      animation = [
+        # leaf, enabled, speed, bezier/spring, style
+        {
+          leaf = "windowsIn";
+          enabled = 1;
+          speed = 3;
+          bezier = "default";
+          style = "popin 50%";
+        }
+        {
+          leaf = "windowsOut";
+          enabled = 1;
+          speed = 4;
+          bezier = "default";
+          style = "popin 75%";
+        }
+        {
+          leaf = "windowsMove";
+          enabled = 1;
+          speed = 3;
+          bezier = "default";
+        }
+        {
+          leaf = "border";
+          enabled = 1;
+          speed = 10;
+          bezier = "default";
+        }
+        {
+          leaf = "borderangle";
+          enabled = 1;
+          speed = 7.5;
+          bezier = "default";
+        }
+        {
+          leaf = "fade";
+          enabled = 1;
+          speed = 7;
+          bezier = "default";
+        }
+        {
+          leaf = "workspaces";
+          enabled = 1;
+          speed = 3;
+          bezier = "default";
+          style = "slidefadevert 10%";
+        }
+        {
+          leaf = "specialWorkspace";
+          enabled = 1;
+          speed = 4;
+          bezier = "default";
+          style = "slidefadevert 5%";
+        }
+        {
+          leaf = "layers";
+          enabled = 1;
+          speed = 2.5;
+          bezier = "default";
+          style = "fade";
+        }
+        {
+          leaf = "fadeLayers";
+          enabled = 1;
+          speed = 2.5;
+          bezier = "default";
+        }
+      ];
 
       # See https://wiki.hypr.land/Configuring/Window-Rules/ for more
       # See https://wiki.hypr.land/Configuring/Workspace-Rules/ for workspace rules
 
-      gesture = [
-        # finger, direction, action
-        "3, left, dispatcher, layoutmsg, move +col"
-        "3, right, dispatcher, layoutmsg, move -col"
+      gesture =
+        # let
+        #   dspFn = {
+        #     layout = msg: lua ''function() hl.dsp.layout("${msg}") end'';
+        #     focusWorkspace = ws: lua ''function() hl.dsp.focus({ workspace = "${toString ws}"}) end'';
+        #   };
+        # in
+        [
+          # finger, direction, action
+          #! It cannot accept the action function somehow
+          # {
+          #   fingers = 3;
+          #   direction = "right";
+          #   action = dspFn.layout "move -col";
+          # }
+          # {
+          #   fingers = 3;
+          #   direction = "left";
+          #   action = dspFn.layout "move +col";
+          # }
+          {
+            fingers = 3;
+            direction = "horizontal";
+            action = "scroll_move";
+          }
+          {
+            fingers = 4;
+            direction = "vertical";
+            action = "workspace";
+          }
+        ];
 
-        "4, up, dispatcher, workspace, +1"
-        "4, down, dispatcher, workspace, -1"
-      ];
-
-      windowrule = [
+      window_rule = [
         # Ignore maximize requests from apps. You'll probably like this.
-        "suppress_event maximize, match:class .*"
+        {
+          match = {
+            class = ".*";
+          };
+          suppress_event = "maximize";
+        }
 
         # Fix some dragging issues with XWayland
-        "no_focus on, match:class ^$,match:title ^$,match:xwayland 1,match:float 1,match:fullscreen 0,match:pin 0"
-
-        # "float on, match:class ^(brave-browser|org.pulseaudio.pavucontrol)$"
-        "tile on, match:class ^(brave-browser)$"
-      ];
-
-      "$mod" = "SUPER";
-
-      "$term" = "foot";
-      "$term_alt" = "foot";
-
-      binde = [
-        "$mod CTRL, h, layoutmsg, colresize -conf"
-        "$mod CTRL, j, layoutmsg, colresize -0.2"
-        "$mod CTRL, k, layoutmsg, colresize +0.2"
-        "$mod CTRL, l, layoutmsg, colresize +conf"
-
-        # Focus panel columns
-        "ALT, Tab, layoutmsg, move +col"
-        "ALT SHIFT, Tab, layoutmsg, move -col"
-
-        "ALT_SHIFT, comma, layoutmsg, swapcol l"
-        "ALT_SHIFT, period, layoutmsg, swapcol r"
-        "ALT_SHIFT, mouse_down, layoutmsg, swapcol l"
-        "ALT_SHIFT, mouse_up, layoutmsg, swapcol r"
+        {
+          match = {
+            class = "^$";
+            title = "^$";
+            xwayland = true;
+            float = true;
+            fullscreen = false;
+            pin = false;
+          };
+          no_focus = true;
+        }
       ];
 
       bind = [
-        "$mod, w, killactive"
-        "$mod, r, exec, uwsm-app -- rofi -show drun -show-icons"
-        "$mod, a, exec, uwsm-app -- rofi -show run -show-icons"
-        "$mod, l, exec, uwsm-app -- hyprlock"
+        # Basic usage
+        (bind "${mod} + W" dsp.close)
+        (bind "${mod} + SHIFT + W" dsp.exit)
+        (bind "${mod} + L" (dsp.exec "uwsm-app -- hyprlock"))
+        (bind "${mod} + R" (dsp.exec "uwsm-app -- rofi -show drun -show-icons"))
+        (bind "${mod} + A" (dsp.exec "uwsm-app -- rofi -show run -show-icons"))
+        (bind "${mod} + Return" (dsp.exec "uwsm-app -- ${term}"))
 
-        "$mod, Return, exec, uwsm-app -- $term"
+        # Screenshot (fn+f6, PrintScreen)
+        (bind "${mod} + SHIFT + S" (dsp.exec "uwsm-app -- hyprshot -m region --notify copysave area"))
+        (bind "PRINT" (dsp.exec "uwsm-app -- hyprshot -m output --notify copysave screen"))
+        (bind "${mod} + PRINT" (dsp.exec "uwsm-app -- hyprshot -m window --notify copysave active"))
 
-        # Screenshot fn+f6
-        "$mod Shift_L, s, exec, uwsm-app -- hyprshot -m region --notify copysave area"
-        " , Print, exec, uwsm-app -- hyprshot -m output --notify copysave screen"
-        "$mod, Print, exec, uwsm-app -- hyprshot -m window --notify copysave active"
+        # Universal copy/paste
+        (bind "${mod} + C" (dsp.sendShortcut "CTRL" "Insert"))
+        (bind "${mod} + V" (dsp.sendShortcut "SHIFT" "Insert"))
+        (bind "${mod} + X" (dsp.sendShortcut "CTRL" "X"))
 
         # # Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
         # bind = $mod, Return, exec, $terminal
@@ -180,8 +274,6 @@
         # bind = $mod, r, exec, uwsm-app -- rofi -show drun -show-icons
         # bind = $mod, s, exec, uwsm-app -- rofi -show run -show-icons
         # #bind = $mod, S, exec, $menu
-        # #bind = $mod, P, pseudo, # dwindle
-        # #bind = $mod, J, togglesplit, # dwindle
         #
         # # Move focus with mod + arrow keys
         # bind = $mod, left, movefocus, l
@@ -189,66 +281,83 @@
         # bind = $mod, up, movefocus, u
         # bind = $mod, down, movefocus, d
 
-        # Switch workspaces with mod + [0-9]
-        "$mod, 1, workspace, 1"
-        "$mod, 2, workspace, 2"
-        "$mod, 3, workspace, 3"
-        "$mod, 4, workspace, 4"
-        "$mod, 5, workspace, 5"
-        "$mod, 6, workspace, 6"
-        "$mod, 7, workspace, 7"
-        "$mod, 8, workspace, 8"
-        "$mod, 9, workspace, 9"
-        "$mod, 0, workspace, 10"
+        # Resize column layout (Scrolling)
+        (bindOpts "${mod} + CTRL + H" (dsp.layout "colresize -conf") { repeating = true; })
+        (bindOpts "${mod} + CTRL + J" (dsp.layout "colresize -0.2") { repeating = true; })
+        (bindOpts "${mod} + CTRL + K" (dsp.layout "colresize +0.2") { repeating = true; })
+        (bindOpts "${mod} + CTRL + L" (dsp.layout "colresize +conf") { repeating = true; })
 
-        # Move active window to a workspace with mod + SHIFT + [0-9]
-        "$mod SHIFT, 1, movetoworkspace, 1"
-        "$mod SHIFT, 2, movetoworkspace, 2"
-        "$mod SHIFT, 3, movetoworkspace, 3"
-        "$mod SHIFT, 4, movetoworkspace, 4"
-        "$mod SHIFT, 5, movetoworkspace, 5"
-        "$mod SHIFT, 6, movetoworkspace, 6"
-        "$mod SHIFT, 7, movetoworkspace, 7"
-        "$mod SHIFT, 8, movetoworkspace, 8"
-        "$mod SHIFT, 9, movetoworkspace, 9"
-        "$mod SHIFT, 0, movetoworkspace, 10"
+        # # Example special workspace (scratchpad)
+        # bind = $mod, N, togglespecialworkspace, magic
+        # bind = $mod SHIFT, N, movetoworkspace, special:magic
 
-        # Scroll through existing workspaces with mod + scroll
-        # "$mod, mouse_down, workspace, e+1"
-        # "$mod, mouse_up, workspace, e-1"
-      ];
+        # Focus panel columns
+        (bind "ALT + TAB" (dsp.layout "move +col"))
+        (bind "ALT + SHIFT + TAB" (dsp.layout "move -col"))
 
-      # # Example special workspace (scratchpad)
-      # bind = $mod, N, togglespecialworkspace, magic
-      # bind = $mod SHIFT, N, movetoworkspace, special:magic
+        # Swap column layout
+        (bind "ALT + SHIFT + COMMA" (dsp.layout "swapcol l"))
+        (bind "ALT + SHIFT + PERIOD" (dsp.layout "swapcol r"))
+        (bind "ALT + SHIFT + mouse_down" (dsp.layout "swapcol l"))
+        (bind "ALT + SHIFT + mouse_up" (dsp.layout "swapcol r"))
 
-      # Move/resize windows with mod + LMB/RMB and dragging
-      bindm = [
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
-      ];
+        # # Move/resize windows with mod + LMB/RMB and dragging
+        # "${mod}, mouse:272, movewindow"
+        # "${mod}, mouse:273, resizewindow"
 
-      # Laptop multimedia keys for volume and LCD brightness
-      bindel = [
-        " ,XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
-        " ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        " ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        " ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-        " ,XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+"
-        " ,XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-"
-      ];
+        # Laptop multimedia keys for volume and LCD brightness
+        (bindOpts "XF86AudioRaiseVolume" (dsp.exec "wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+") {
+          locked = true;
+          repeating = true;
+        })
+        (bindOpts "XF86AudioLowerVolume" (dsp.exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-") {
+          locked = true;
+          repeating = true;
+        })
+        (bindOpts "XF86AudioMute" (dsp.exec "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle") {
+          locked = true;
+          repeating = true;
+        })
+        (bindOpts "XF86AudioMicMute" (dsp.exec "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle") {
+          locked = true;
+          repeating = true;
+        })
+        (bindOpts "XF86MonBrightnessUp" (dsp.exec "brightnessctl -e4 -n2 set 5%+") {
+          locked = true;
+          repeating = true;
+        })
+        (bindOpts "XF86MonBrightnessDown" (dsp.exec "brightnessctl -e4 -n2 set 5%-") {
+          locked = true;
+          repeating = true;
+        })
+      ]
+      ++ lib.concatMap (
+        ws:
+        let
+          key = toString (lib.mod ws 10);
+        in
+        [
+          # Switch workspace with mod + [0-9]
+          (bind "${mod} + ${key}" (dsp.focusWorkspace ws))
+          # Move active window to a workspace with mod + SHIFT + [0-9]
+          (bind "${mod} + SHIFT + ${key}" (dsp.moveToWorkspace ws))
+        ]
+      ) (lib.range 1 10);
+
+      # Scroll through existing workspaces with mod + scroll
+      # "$mod, mouse_down, workspace, e+1"
+      # "$mod, mouse_up, workspace, e-1"
 
       # # Requires playerctl
       # bindl = , XF86AudioNext, exec, playerctl next
       # bindl = , XF86AudioPause, exec, playerctl play-pause
       # bindl = , XF86AudioPlay, exec, playerctl play-pause
       # bindl = , XF86AudioPrev, exec, playerctl previous
-
-      source = [
-        "${config.home.homeDirectory}/.config/hypr/local.conf"
-      ];
     };
 
+    extraConfig = ''
+      pcall(require, "local")
+    '';
     # exec-once = [];
   };
 }
