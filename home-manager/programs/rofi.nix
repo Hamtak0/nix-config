@@ -36,7 +36,7 @@ in
       };
 
       "window" = {
-        width = mkLiteral "800px";
+        width = mkLiteral "960px";
         location = mkLiteral "center";
         anchor = mkLiteral "north";
         y-offset = mkLiteral "-140px";
@@ -84,7 +84,7 @@ in
       };
 
       "listview" = {
-        lines = 7;
+        lines = 5;
         columns = 1;
         fixed-height = true;
         scrollbar = false;
