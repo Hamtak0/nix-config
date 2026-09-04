@@ -265,6 +265,9 @@ in
         (bind "${mod} + V" (dsp.sendShortcut "SHIFT" "Insert"))
         (bind "${mod} + X" (dsp.sendShortcut "CTRL" "X"))
 
+        # Waybar
+        (bind "${mod} + T" (dsp.exec "pkill -SIGUSR1 waybar || waybar"))
+
         # # Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
         # bind = $mod, Return, exec, $terminal
         # bind = $mod, W, killactive,
