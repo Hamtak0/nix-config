@@ -48,9 +48,21 @@
 
         "clock" = {
           interval = 1;
-          format = "󰸗 {0:%a, %b %d}  •  󱑂 {0:%H:%M}";
+          format = "󰸗 {0:L%m月 %d日 (%a)}  •  󱑂 {0:%H:%M}";
           format-alt = "󱑂 {0:%H:%M:%S}";
-          tooltip-format = "<tt><small>{calendar}</small></tt>";
+          tooltip-format = "<span font_family='Noto Sans Mono CJK JP' font_size='11pt'>{calendar}</span>";
+          calendar = {
+            mode = "month";
+            mode-mon-col = 3;
+            weeks-pos = "none";
+            on-scroll = 1;
+            format = {
+              months = "<span color='#f5a3b7'><b>{}</b></span>";
+              days = "<span color='#fdeff2'>{}</span>";
+              weekdays = "<span color='#ecc6d9'><b>{}</b></span>";
+              today = "<span color='#d05a7e'><b>{}</b></span>";
+            };
+          };
         };
 
         "pulseaudio" = {
