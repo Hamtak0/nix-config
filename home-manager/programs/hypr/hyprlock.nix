@@ -30,7 +30,7 @@
           {
             monitor = "";
             size = "480, 420";
-            color = "rgba(26, 21, 27, 0.82)";
+            color = "rgba(26, 21, 27, 0.88)";
             rounding = 24;
             border_size = 1;
             border_color = "rgba(254, 223, 225, 0.22)";
@@ -123,8 +123,7 @@
       background {
           monitor =
           path = $wallpaper
-          blur_passes = 3
-          blur_size = 7
+          blur_passes = 0
           contrast = 0.8916
           brightness = 0.816
           vibrancy = 0.8916
