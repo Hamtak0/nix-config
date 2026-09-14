@@ -15,6 +15,7 @@
     ./nix-index.nix
     # ./nixvim.nix
     ./obs-studio.nix
+    ./obsidian.nix
     ./ripgrep.nix
     ./rofi.nix
     ./vscode.nix
