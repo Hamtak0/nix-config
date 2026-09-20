@@ -63,9 +63,6 @@
     homeDirectory = "/home/tako";
   };
 
-  # Add stuff for your user as you see fit:
-  home.packages = with pkgs; [ ];
-
   programs.home-manager.enable = true;
 
   # Nicely reload system units when changing configs
