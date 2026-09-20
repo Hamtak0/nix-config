@@ -10,13 +10,11 @@
     ./libreoffice.nix
     ./nixd.nix
     ./nixfmt.nix
-    ./ocaml.nix
     ./okular.nix
     ./packettracer.nix
     ./pavucontrol.nix
     ./slack.nix
     ./telegram.nix
-    ./typst.nix
     ./wireshark.nix
     ./xournalpp.nix
     ./zen-browser.nix
