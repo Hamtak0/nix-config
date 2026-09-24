@@ -1,6 +1,7 @@
 {
   imports = [
     ./asusd.nix
+    ./flatpak.nix
     ./gnome-keyring.nix
     # ./hermes-agent.nix
     # ./open-webui.nix
