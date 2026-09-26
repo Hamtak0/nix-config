@@ -16,6 +16,7 @@
     ./slack.nix
     ./telegram.nix
     ./wireshark.nix
+    ./xnviewmp.nix
     ./xournalpp.nix
     ./zen-browser.nix
   ];
