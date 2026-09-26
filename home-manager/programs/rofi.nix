@@ -5,10 +5,10 @@ in
 {
   programs.rofi = {
     enable = true;
-    font = "JetBrainsMono Nerd Font 12";
-    terminal = "foot";
 
-    extraConfig = {
+    settings = {
+      font = "JetBrainsMono Nerd Font 12";
+      terminal = "foot";
       modi = "drun,run,filebrowser";
       show-icons = true;
       display-drun = " ";
