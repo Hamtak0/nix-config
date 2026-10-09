@@ -19,6 +19,7 @@
         "networkmanager"
         "libvirtd"
         "librepods"
+        "docker"
       ];
       shell = pkgs.fish;
     };

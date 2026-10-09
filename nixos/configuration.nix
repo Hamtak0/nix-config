@@ -37,6 +37,7 @@
     ./steam.nix
     ./time.nix
     ./users.nix
+    ./virtualisation.nix
 
     inputs.home-manager.nixosModules.home-manager
   ];
