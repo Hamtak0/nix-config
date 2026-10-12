@@ -86,7 +86,7 @@ in
         };
 
         general = {
-          gaps_in = 1;
+          gaps_in = 0;
           gaps_out = 0;
           border_size = 0;
           layout = "scrolling";
