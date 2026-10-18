@@ -23,6 +23,7 @@
     ./yazi.nix
     ./zathura.nix
     ./zed.nix
+    ./zen-browser.nix
     ./zoxide.nix
   ];
 }

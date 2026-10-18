@@ -18,6 +18,5 @@
     ./wireshark.nix
     ./xnviewmp.nix
     ./xournalpp.nix
-    ./zen-browser.nix
   ];
 }
