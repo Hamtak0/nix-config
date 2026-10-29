@@ -3,6 +3,7 @@
     # ./aider-chat.nix
     ./anki.nix
     ./antigravity.nix
+    ./claude-code.nix
     ./discord.nix
     ./eza.nix
     ./fastfetch.nix
