@@ -15,6 +15,7 @@
     ./pavucontrol.nix
     ./slack.nix
     ./telegram.nix
+    ./unzip.nix
     ./wireshark.nix
     ./xnviewmp.nix
     ./xournalpp.nix
